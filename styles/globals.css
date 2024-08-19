@@ -96,8 +96,10 @@ a {
 // hamburger
 .navbar__toogleBtn {
   display: none;
-  position: absolute; /* 절대적 위치 설정, 상단으로 올라감 */
-  right: 32px; /* 우측에서 32px떨어진 곳에 위치 */
+  width: 35px;
+  height: 30px;
+  position: relative;
+  right: 16px; /* 우측에서 32px떨어진 곳에 위치 */
   font-size: 24px; /* 명칭과 달리 아이콘의 이미지가 크게 하기 위한 조절 */
   color: rgb(19, 61, 56);
 }
@@ -137,15 +139,15 @@ a {
     display: block;
     cursor: pointer;
     position: absolute; /* 절대적 위치 설정, 상단으로 올라감 */
-    right: 32px; /* 우측에서 32px떨어진 곳에 위치 */
+    right: 10px; /* 우측에서 32px떨어진 곳에 위치 */
     font-size: 24px; /* 명칭과 달리 아이콘의 이미지가 크게 하기 위한 조절 */
     color: rgb(19, 61, 56);
   }
-  .hamburger {
+  /* .hamburger {
     display: block;
-  }
+  } */
   .navbar__toogleBtn:hover {
-    display: block;
+    /* display: block; */
 
     /* navbar__menu,
     navbar__icons {

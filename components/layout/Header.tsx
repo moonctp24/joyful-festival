@@ -31,26 +31,26 @@ const Header = () => {
             <i className="fas fa-home">z</i>
           </li>
         </ul>
-        {/* 햄버거! */}
-        <div className="navbar__toogleBtn">
-          <svg
-            width="33"
-            height="24"
-            viewBox="0 0 33 24"
-            fill="none"
-            className="hamburger w-[31.76px] h-[22.86px] "
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M5.62854 16.7621H26.799M5.62854 12.0002H26.799M5.62854 7.23828H26.799"
-              stroke="#1E90FF"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            ></path>
-          </svg>
-        </div>
+        {/* 햄버거 */}
+        <svg
+          width="35"
+          height="30"
+          viewBox="0 0 35 30"
+          fill="none"
+          className="navbar__toogleBtn hamburger"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M5.83337 21.25H29.1667M5.83337 15H29.1667M5.83337 8.75H29.1667"
+            stroke="#1E90FF"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+        </svg>
+        {/* 햄버거 */}
       </nav>
+      {/* 가로선 */}
       <svg
         width="100%"
         height="2"
@@ -61,6 +61,7 @@ const Header = () => {
       >
         <path d="M-3 0.999966L390 1" stroke="#1E90FF" strokeWidth="0.2"></path>
       </svg>
+      {/* 가로선 */}
     </>
   );
 };
