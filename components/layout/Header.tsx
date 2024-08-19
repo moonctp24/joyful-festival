@@ -38,16 +38,15 @@ const Header = () => {
             height="24"
             viewBox="0 0 33 24"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
             className="hamburger w-[31.76px] h-[22.86px] "
             preserveAspectRatio="none"
           >
             <path
               d="M5.62854 16.7621H26.799M5.62854 12.0002H26.799M5.62854 7.23828H26.799"
               stroke="#1E90FF"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></path>
           </svg>
         </div>
@@ -57,11 +56,10 @@ const Header = () => {
         height="2"
         viewBox="0 0 390 2"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="absolute left-[-3.1px] top-[55.9px]"
+        className="absolute"
         preserveAspectRatio="none"
       >
-        <path d="M-3 0.999966L390 1" stroke="#1E90FF" stroke-width="0.2"></path>
+        <path d="M-3 0.999966L390 1" stroke="#1E90FF" strokeWidth="0.2"></path>
       </svg>
     </>
   );
