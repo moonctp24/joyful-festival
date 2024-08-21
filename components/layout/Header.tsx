@@ -3,32 +3,17 @@ const Header = () => {
     <>
       <nav className="navbar">
         <div className="navbar__logo">
-          <i className="fas fa-dog"></i>
           <a href="">LOGO</a>
         </div>
-        <ul className="navbar__menu">
-          <li>
-            <a href="" className="text-xl">
-              국내축제
-            </a>
-          </li>
-          <li>
-            <a href="" className="text-xl">
-              세계축제
-            </a>
-          </li>
-          <li>
-            <a href="" className="text-xl">
-              관심행사
-            </a>
-          </li>
-        </ul>
         <ul className="navbar__icons">
           <li>
-            <i className="far fa-building">h</i>
+            <button className="acctBtn">로그인</button>
           </li>
           <li>
-            <i className="fas fa-home">z</i>
+            <button className="acctBtn">로그아웃</button>
+          </li>
+          <li>
+            <button className="acctBtn">내정보</button>
           </li>
         </ul>
         {/* 햄버거 */}
@@ -37,7 +22,7 @@ const Header = () => {
           height="30"
           viewBox="0 0 35 30"
           fill="none"
-          className="navbar__toogleBtn hamburger"
+          className="hamburger"
           preserveAspectRatio="none"
         >
           <path
@@ -50,13 +35,26 @@ const Header = () => {
         </svg>
         {/* 햄버거 */}
       </nav>
+      <nav className="navbar_full">
+        <ul className="navbar__menu">
+          <li>
+            <button className="text-xl menuBtn">국내축제</button>
+          </li>
+          <li>
+            <button className="text-xl menuBtn">세계축제</button>
+          </li>
+          <li>
+            <button className="text-xl menuBtn">관심행사</button>
+          </li>
+        </ul>
+      </nav>
       {/* 가로선 */}
       <svg
         width="100%"
         height="2"
         viewBox="0 0 390 2"
         fill="none"
-        className="absolute"
+        className="absolute headerLine"
         preserveAspectRatio="none"
       >
         <path d="M-3 0.999966L390 1" stroke="#1E90FF" strokeWidth="0.2"></path>

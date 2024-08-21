@@ -47,54 +47,86 @@ a {
   color: #000;
   font-family: "Roboto", "Noto Sans KR", dotum, "돋움", sans-serif;
 }
+
+/* ----- button ----- */
+button {
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  cursor: pointer;
+  outline: 0;
+  width: 100%;
+  height: 70px;
+  border-radius: 8px;
+  background: #00c1a6;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 2px 2px;
+  border: 0;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: bold;
+  font-family: "Roboto", "Noto Sans KR", dotum, "돋움", sans-serif;
+  text-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  line-height: 15px;
+  font-weight: 500;
+  -webkit-transition: background-color 0.05s ease-in-out;
+  -moz-transition: background-color 0.05s ease-in-out;
+  -o-transition: background-color 0.05s ease-in-out;
+  transition: background-color 0.05s ease-in-out;
+  vertical-align: middle;
+}
+/* ----- button ----- */
+
 /*------------------- HEADER LAYOUT -------------------*/
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: * * var(--accent-color) * *;
-  padding: 8px 12px;
+  padding: 8px 24px;
+}
+.navbar_full {
+  margin: 0px auto 0px auto;
+  width: 80%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: * * var(--accent-color) * *;
+  /* padding: 8px 24px; */
 }
 .navbar__logo {
   font-size: 24px;
   /* color: white; */
 }
 
-.navbar__logo i {
-  color: #9dbbbb;
-}
-
-.navbar__menu {
-  display: flex;
-  list-style: none;
-  padding-left: 0;
-}
-
-.navbar__menu li {
-  padding: 8px 12px;
-}
-.navbar__menu a {
-  font-size: 20px;
-  font-style: bold;
-}
-.navbar__menu a:hover {
-  /* background-color: rgb(19, 61, 56);
-  border-radius: 4px; */
-  color: var(--main-color);
-}
 .navbar__icons {
   list-style: none;
-  color: white;
+  /* color: white; */
   display: flex;
   padding-left: 0;
 }
-
 .navbar__icons li {
   padding: 8px 12px;
 }
 
-// hamburger
-.navbar__toogleBtn {
+.acctBtn {
+  background: none;
+  color: #000;
+}
+.acctBtn:hover {
+  color: var(--main-color);
+}
+
+// hamburger 왜 두번 선언해야 CSS 먹는지 모르겠음
+.hamburger {
+}
+.hamburger {
   display: none;
   width: 35px;
   height: 30px;
@@ -103,7 +135,23 @@ a {
   font-size: 24px; /* 명칭과 달리 아이콘의 이미지가 크게 하기 위한 조절 */
   color: rgb(19, 61, 56);
 }
-.hamburger {
+
+.navbar__menu {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+}
+.menuBtn {
+  max-height: 50px;
+  padding: 10px 20px;
+  background: none;
+  color: #000;
+}
+.menuBtn:hover {
+  color: var(--main-color);
+}
+
+.headerLine {
   display: none;
 }
 
@@ -133,9 +181,9 @@ a {
     display: none;
     justify-content: center;
     width: 100%;
-    display: flex;
   }
-  .navbar__toogleBtn {
+
+  .hamburger {
     display: block;
     cursor: pointer;
     position: absolute; /* 절대적 위치 설정, 상단으로 올라감 */
@@ -143,10 +191,7 @@ a {
     font-size: 24px; /* 명칭과 달리 아이콘의 이미지가 크게 하기 위한 조절 */
     color: rgb(19, 61, 56);
   }
-  /* .hamburger {
-    display: block;
-  } */
-  .navbar__toogleBtn:hover {
+  .hamburger:hover {
     /* display: block; */
 
     /* navbar__menu,
@@ -157,6 +202,9 @@ a {
   .navbar__menu a {
     font-size: 25px;
     font-style: bold;
+  }
+  .headerLine {
+    display: block;
   }
 }
 /*------------------- HEADER LAYOUT -------------------*/
