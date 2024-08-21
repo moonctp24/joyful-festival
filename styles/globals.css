@@ -47,7 +47,18 @@ a {
   color: #000;
   font-family: "Roboto", "Noto Sans KR", dotum, "돋움", sans-serif;
 }
-
+main {
+  margin: 10px auto 70px auto;
+  width: 80%;
+  /* max-width: 1200px; */
+  min-height: 600px;
+}
+@media screen and (max-width: 500px) {
+  main {
+    width: 100px;
+    margin: 10px auto 10px auto;
+  }
+}
 /* ----- button ----- */
 button {
   letter-spacing: normal;
