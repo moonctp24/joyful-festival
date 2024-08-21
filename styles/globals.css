@@ -48,7 +48,7 @@ a {
   font-family: "Roboto", "Noto Sans KR", dotum, "돋움", sans-serif;
 }
 main {
-  margin: 10px auto 70px auto;
+  margin: 10px auto 10px auto;
   width: 80%;
   /* max-width: 1200px; */
   min-height: 600px;
