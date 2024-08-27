@@ -1,4 +1,7 @@
 const Header = () => {
+  const hamClick = () => {
+    console.log("ham clicked");
+  };
   return (
     <>
       <nav className="navbar">
@@ -24,6 +27,7 @@ const Header = () => {
           fill="none"
           className="hamburger"
           preserveAspectRatio="none"
+          onClick={hamClick}
         >
           <path
             d="M5.83337 21.25H29.1667M5.83337 15H29.1667M5.83337 8.75H29.1667"
