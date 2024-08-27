@@ -40,7 +40,8 @@
 
 body {
   margin: 0;
-  font-family: "Roboto"; /* 폰트적용 */
+  /* font-family: "Roboto"; 폰트적용 */
+  font-family: "Roboto", "Noto Sans KR", dotum, "돋움", sans-serif;
 }
 a {
   text-decoration: none; /* 밑줄 기능 없앰 */
@@ -55,7 +56,7 @@ main {
 }
 @media screen and (max-width: 500px) {
   main {
-    width: 100px;
+    /* width: 100px; */
     margin: 10px auto 10px auto;
   }
 }
@@ -348,3 +349,130 @@ button {
   }
 }
 /*------------------- FOOTER LAYOUT -------------------*/
+
+/*------------------- SELECT BOX LAYOUT -------------------*/
+.select_box {
+  position: absolute;
+  display: inline-block;
+  width: 80%;
+}
+.select_box_small {
+  position: relative;
+  display: inline-block;
+  /* min-width: 81px; */
+  width: 150px;
+  height: 40px;
+}
+.select_txt {
+  position: absolute;
+  display: block;
+  padding: 10px 41px 10px 15px;
+  width: 80%;
+  width: 350px;
+  height: 40px;
+  color: #666;
+  font-weight: 700;
+  text-align: left;
+  background-color: #efefef;
+  border-radius: 5px;
+}
+.select_txt_small {
+  position: relative;
+  display: block;
+  padding: 10px 15px 10px 15px;
+  max-width: 100px;
+  height: 35px;
+  color: #00c1a6;
+  font-weight: 700;
+  text-align: left;
+  font-size: 15px;
+  background-color: #efefef;
+  border-radius: 20px;
+}
+.select_txt:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  margin-top: -8px;
+  width: 16px;
+  height: 16px;
+  background: url(../public/images/ico_dropdown_down.png) no-repeat 50% 50% /
+    12px;
+}
+.select_txt_small:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  margin-top: -8px;
+  width: 16px;
+  height: 16px;
+  background: url(../public/images/ico_dropdown_down.png) no-repeat 50% 50% /
+    12px;
+}
+.select_lst {
+  visibility: hidden;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, -0%);
+  /* min-width: 100%; */
+  width: 170px;
+  max-height: 200px;
+  overflow-y: auto;
+  white-space: nowrap;
+  background: #fff;
+  border: 1px solid #efefef;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  z-index: 9;
+}
+.select_lst::-webkit-scrollbar {
+  width: 16px;
+}
+.select_lst::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 8px;
+  background-clip: padding-box;
+  border: 6px solid #fff;
+}
+.select_lst::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+.select_lst li {
+  display: block;
+  padding: 10px 20px;
+}
+.select_lst .selectbutton {
+  /* padding: 10px 10px 10px 10px; */
+  font-size: 12px;
+  line-height: 18px;
+  cursor: pointer;
+}
+.select_lst .selectbutton:hover {
+  color: var(--main-color);
+}
+.select_box.open .select_txt:after {
+  background-image: url(../public/images/ico_dropdown_up.png);
+}
+.select_box.open .select_lst {
+  visibility: visible;
+}
+
+.select_box_small.open .select_txt:after {
+  background-image: url(../public/images/ico_dropdown_up.png);
+}
+.select_box_small.open .select_lst {
+  visibility: visible;
+}
+
+.select_box.open .select_txt_small:after {
+  background-image: url(../public/images/ico_dropdown_up.png);
+}
+.select_box_small.open .select_txt_small:after {
+  background-image: url(../public/images/ico_dropdown_up.png);
+}
+/*------------------- SELECT BOX LAYOUT -------------------*/
