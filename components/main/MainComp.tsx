@@ -11,12 +11,16 @@ const MainComp: NextPage = () => {
   return (
     <>
       <MainTabComp />
-      <div>
-        <DropBoxComp stateList={ingYNList} />
-        <div className="space10" />
-        <DropBoxComp stateList={monthList} />
-        <div className="space10" />
-        <DropBoxComp stateList={regionList} />
+      <div className="webFlex">
+        <div className="webFlex mr-3">
+          <DropBoxComp stateList={ingYNList} />
+          <div className="space10 webHidden" />
+          <DropBoxComp stateList={monthList} />
+          <div className="space10 webHidden" />
+          <DropBoxComp stateList={regionList} />
+        </div>
+        <div className="space20 webHidden" />
+        <button className="h-10 webNavBttn">검색</button>
       </div>
     </>
   );

@@ -50,7 +50,7 @@ a {
 }
 main {
   margin: 10px auto 10px auto;
-  width: 80%;
+  width: 70%;
   /* max-width: 1200px; */
   min-height: 600px;
 }
@@ -72,7 +72,7 @@ button {
   width: 100%;
   height: 70px;
   border-radius: 8px;
-  background: #00c1a6;
+  background: var(--main-color);
   color: #fff;
   padding: 10px 20px;
   margin: 2px 2px;
@@ -104,8 +104,8 @@ button {
 }
 .navbar_full {
   margin: 0px auto 0px auto;
-  width: 80%;
-  max-width: 1200px;
+  width: 70%;
+  /* max-width: 1200px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -222,6 +222,19 @@ button {
 @media screen and (min-width: 500px) {
   .webHidden {
     display: none;
+  }
+  .webFlex {
+    width: 100%;
+    display: flex;
+    /* justify-content: space-between; */
+  }
+  .webNavBttn {
+    width: 160px;
+    min-width: 70px;
+  }
+  .webFilterBtn {
+    max-width: 300px;
+    width: 90%;
   }
 }
 /*------------------- HEADER LAYOUT -------------------*/
@@ -374,10 +387,11 @@ button {
   position: absolute;
   display: block;
   padding: 10px 41px 10px 15px;
-  width: 100%;
+  width: 90%;
   /* width: 350px; */
   white-space: nowrap; /* 줄바꿈 금지하고 */
   text-overflow: ellipsis; /* 말줄임표 사용 */
+  overflow: hidden;
   height: 40px;
   color: #666;
   font-weight: 700;
@@ -483,6 +497,17 @@ button {
 }
 .select_box_small.open .select_txt_small:after {
   background-image: url(../public/images/ico_dropdown_up.png);
+}
+@media screen and (min-width: 500px) {
+  .select_box {
+    max-width: 320px;
+    width: 15%;
+    margin-right: 20px;
+  }
+  .select_txt {
+    /* width: 90%; */
+    max-width: 300px;
+  }
 }
 /*------------------- SELECT BOX LAYOUT -------------------*/
 /* ----- Space | Empty | Area | Padding ----- */

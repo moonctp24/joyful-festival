@@ -30,20 +30,18 @@ const DropBoxComp = (props: { stateList: Array<string> }) => {
 
   return (
     <>
-      <div className="w-[352px] h-[39px]">
-        <div className="select_box" id="select_box">
-          <div className={`select_box ${isClicked && "open"}`} id="select_box">
-            <button
-              className="select_txt"
-              id="select_txt"
-              onClick={selectBoxBtnHandler}
-            >
-              {selectedValue}
-            </button>
-            {!!selectedStatusNm && (
-              <ul className="select_lst">{selectedStatusNm}</ul>
-            )}
-          </div>
+      <div className="w-[352px] h-[39px] webFilterBtn">
+        <div className={`select_box ${isClicked && "open"}`} id="select_box">
+          <button
+            className="select_txt"
+            id="select_txt"
+            onClick={selectBoxBtnHandler}
+          >
+            {selectedValue}
+          </button>
+          {!!selectedStatusNm && (
+            <ul className="select_lst">{selectedStatusNm}</ul>
+          )}
         </div>
       </div>
     </>
