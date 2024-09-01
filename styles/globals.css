@@ -621,3 +621,9 @@ button {
   background: #fff;
 }
 /*------------------- RESULT TAB LAYOUT -------------------*/
+
+@media screen and (max-width: 500px) {
+  .mobileHidden {
+    display: none;
+  }
+}

@@ -1,7 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const ResultTabComp = () => {
+const ResultTabComp = (props: any) => {
   const [resultTab, setResultTab] = useState(0);
+
+  const selectedTabNum = () => {
+    props.selectedTabNum(resultTab);
+  };
+
+  useEffect(() => {
+    selectedTabNum();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resultTab]);
 
   return (
     <>
