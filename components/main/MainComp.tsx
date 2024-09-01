@@ -1,12 +1,30 @@
 import { NextPage } from "next";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import DropBoxComp from "../comm/select/DropBoxComp";
 import MainTabComp from "../comm/tab/MainTabComp";
 
 const MainComp: NextPage = () => {
+  const nowTab = useSelector((state: any) => state.nowTab.nowTabNum);
+
   const ingYNList = ["개최중여부 선택", "개최중", "개최예정"];
   const monthList = ["개최시기 선택", "1월", "2월", "3월", "4월"];
-  const regionList = ["지역 선택", "서울", "인천", "부산"];
+  const [regionList, setRegionList] = useState([
+    "지역 선택",
+    "서울",
+    "인천",
+    "부산",
+  ]);
+
+  useEffect(() => {
+    // retrieve data if tab number is updated
+    if (nowTab === 0) {
+      setRegionList(["지역 선택", "서울", "인천", "부산"]);
+    } else {
+      setRegionList(["나라 선택", "일본", "중국", "영국"]);
+    }
+  }, [nowTab]);
 
   return (
     <>

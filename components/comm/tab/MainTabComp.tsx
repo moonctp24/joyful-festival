@@ -1,7 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { nowTabAction } from "@/store/nowTab/nowTab-slice";
 
 const MainTabComp = () => {
+  const dispatch = useDispatch();
+
   const [nowTab, setNowTab] = useState(0);
+
+  useEffect(() => {
+    dispatch(
+      nowTabAction.updateNowTab({
+        tabNum: nowTab,
+      }),
+    ),
+      [nowTab];
+  });
 
   return (
     <div className="w-11/12 h-8 flex justify-between items-center my-6 m-auto webHidden">

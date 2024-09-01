@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const DropBoxComp = (props: { stateList: Array<string> }) => {
   const [isClicked, setIsClicked] = useState(false);
@@ -6,9 +6,10 @@ const DropBoxComp = (props: { stateList: Array<string> }) => {
     setIsClicked(!isClicked);
   };
 
-  const [selectedValue, setSelectedValue] = useState<string>(
-    props.stateList ? props.stateList[0] : "",
-  ); // 현재 선택된 status
+  const [selectedValue, setSelectedValue] = useState(props.stateList[0]); // 현재 선택된 status
+  useEffect(() => {
+    setSelectedValue(props.stateList[0]);
+  }, [props.stateList]);
   const selectedStatusNm = props.stateList?.map(
     (state: string, index: number) => (
       <li key={index}>
