@@ -1,15 +1,27 @@
+import { useState } from "react";
+
 const ResultTabComp = () => {
+  const [resultTab, setResultTab] = useState(0);
+
   return (
     <>
-      <div className="ec-base-tab typeLight">
-        <ul className="menu">
-          <li className="selected">
-            <a href="#none">탭 버튼1</a>
-          </li>
-          <li>
-            <a href="#none">탭 버튼2</a>
-          </li>
-        </ul>
+      <div className="ec-base-tab typeLight flex webHidden">
+        <div
+          className={`text-base font-semibold menu ${
+            resultTab === 0 && "selected"
+          }`}
+          onClick={() => setResultTab(0)}
+        >
+          지도로보기
+        </div>
+        <div
+          className={`text-base font-semibold menu ${
+            resultTab === 1 && "selected"
+          }`}
+          onClick={() => setResultTab(1)}
+        >
+          리스트로보기
+        </div>
       </div>
     </>
   );
