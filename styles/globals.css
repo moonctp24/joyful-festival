@@ -6,7 +6,7 @@
 @layer components {
   .vercel {
     min-height: 100vh;
-    background: #fff;
+    background: var(--default-background-color);
     color: #000;
     font-family:
       -apple-system,
@@ -36,6 +36,7 @@
 
 :root {
   --main-color: #1e90ff;
+  --default-background-color: #fff;
 }
 
 body {
@@ -575,3 +576,69 @@ button {
   margin-top: 30px;
 }
 /* ----- Space | Empty | Area | Padding ----- */
+
+.ec-base-tab {
+  position: relative;
+}
+.ec-base-tab .menu {
+  margin: 0 0 20px;
+  border: 1px solid var(--main-color);
+  border-left: 0;
+  border-bottom-color: var(--main-color);
+  border-top-color: var(--default-background-color);
+  border-right-color: var(--default-background-color);
+  border-left: 0;
+  /* background: #f2f2f2; */
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+.ec-base-tab .menu:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.ec-base-tab .menu li {
+  width: 80%;
+  max-width: 160px;
+  float: left;
+}
+.ec-base-tab .menu li a {
+  display: block;
+  /* max-width: 180px; */
+  margin: 0 0 0 -1px;
+  padding: 12px 5px 11px;
+  text-decoration: none;
+  outline: 0;
+  text-align: center;
+}
+.ec-base-tab .menu li:first-child a {
+  margin-left: 0;
+}
+.ec-base-tab .menu li.selected a {
+  position: relative;
+  left: -2px;
+  margin: 0 0 -1px;
+  border: 1px solid var(--main-color);
+  border-bottom: 0;
+  color: #fff;
+  font-weight: bold;
+  background: #4a5164;
+}
+.ec-base-tab .menu li.selected:first-child a {
+  left: -1px;
+}
+.ec-base-tab .right {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  line-height: 24px;
+  color: #909090;
+}
+/* typeLight */
+.ec-base-tab.typeLight .menu li.selected a {
+  /* margin: 0 0 -2px; */
+  border-bottom: 1px solid var(--default-background-color);
+  color: #404040;
+  background: #fff;
+}

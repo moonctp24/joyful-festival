@@ -41,6 +41,7 @@ const MainComp: NextPage = () => {
         <div className="space20 webHidden" />
         <button className="h-10 webNavBttn">검색</button>
       </div>
+      <div className="space30" />
       <ResultComp />
     </>
   );
