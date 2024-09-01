@@ -1,4 +1,4 @@
 const ResultListComp = () => {
-  return <>result list area</>;
+  return <>LIST</>;
 };
 export default ResultListComp;
