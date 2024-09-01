@@ -219,6 +219,11 @@ button {
     display: block;
   }
 }
+@media screen and (min-width: 500px) {
+  .webHidden {
+    display: none;
+  }
+}
 /*------------------- HEADER LAYOUT -------------------*/
 
 /*------------------- FOOTER LAYOUT -------------------*/

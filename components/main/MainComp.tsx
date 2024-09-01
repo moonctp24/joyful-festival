@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 
 import DropBoxComp from "../comm/select/DropBoxComp";
+import MainTabComp from "../comm/tab/MainTabComp";
 
 const MainComp: NextPage = () => {
   const ingYNList = ["개최중여부 선택", "개최중", "개최예정"];
@@ -9,11 +10,14 @@ const MainComp: NextPage = () => {
 
   return (
     <>
-      <DropBoxComp stateList={ingYNList} />
-      <div className="space10" />
-      <DropBoxComp stateList={monthList} />
-      <div className="space10" />
-      <DropBoxComp stateList={regionList} />
+      <MainTabComp />
+      <div>
+        <DropBoxComp stateList={ingYNList} />
+        <div className="space10" />
+        <DropBoxComp stateList={monthList} />
+        <div className="space10" />
+        <DropBoxComp stateList={regionList} />
+      </div>
     </>
   );
 };
