@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import DropBoxComp from "../comm/select/DropBoxComp";
-import MainTabComp from "../comm/tab/MainTabComp";
+import MainTabComp from "./MainTabComp";
+import ResultComp from "./resultArea/ResultComp";
 
 const MainComp: NextPage = () => {
   const nowTab = useSelector((state: any) => state.nowTab.nowTabNum);
@@ -40,6 +41,7 @@ const MainComp: NextPage = () => {
         <div className="space20 webHidden" />
         <button className="h-10 webNavBttn">검색</button>
       </div>
+      <ResultComp />
     </>
   );
 };
