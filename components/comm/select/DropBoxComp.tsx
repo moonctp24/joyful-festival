@@ -1,24 +1,26 @@
 import { useState } from "react";
 
-const DropBoxComp = (props: object) => {
-  console.log(props);
+const DropBoxComp = (props: { stateList: Array<string> }) => {
   const [isClicked, setIsClicked] = useState(false);
   const selectBoxBtnHandler = () => {
     setIsClicked(!isClicked);
   };
 
-  const stateList = ["개최중여부 선택", "개최중", "개최예정"];
-  const [selectedValue, setSelectedValue] = useState<string>("개최중여부 선택"); // 현재 선택된 status
-  const selectedStatusNm = stateList?.map((state: string, index: number) => (
-    <li key={index}>
-      <div
-        className="selectbutton"
-        onClick={() => answerStateValueSelectedHandler(state)}
-      >
-        {state}
-      </div>
-    </li>
-  ));
+  const [selectedValue, setSelectedValue] = useState<string>(
+    props.stateList ? props.stateList[0] : "",
+  ); // 현재 선택된 status
+  const selectedStatusNm = props.stateList?.map(
+    (state: string, index: number) => (
+      <li key={index}>
+        <div
+          className="selectbutton"
+          onClick={() => answerStateValueSelectedHandler(state)}
+        >
+          {state}
+        </div>
+      </li>
+    ),
+  );
 
   const answerStateValueSelectedHandler = (state: string) => {
     // console.log(state);
