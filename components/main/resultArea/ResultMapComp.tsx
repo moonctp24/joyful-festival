@@ -1,4 +1,6 @@
+import KakaoMap from "@/components/KakaoMap";
+
 const ResultMapComp = () => {
-  return <div className="w-[300px]">MAP</div>;
+  return <KakaoMap />;
 };
 export default ResultMapComp;
