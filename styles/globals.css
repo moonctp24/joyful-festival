@@ -55,7 +55,7 @@ main {
   /* max-width: 1200px; */
   min-height: 600px;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
   main {
     /* width: 100px; */
     width: 80%;
@@ -169,7 +169,7 @@ button {
   display: none;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
   .navbar {
     flex-direction: column; /* 각 영역을 column방향으로 함 */
     align-items: flex-start; /* 각 영역을 좌(스타트)측 배열시킴 */
@@ -221,7 +221,7 @@ button {
     display: block;
   }
 }
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 700px) {
   .webHidden {
     display: none;
   }
@@ -500,7 +500,7 @@ button {
 .select_box_small.open .select_txt_small:after {
   background-image: url(../public/images/ico_dropdown_up.png);
 }
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 700px) {
   .select_box {
     max-width: 320px;
     width: 15%;
@@ -622,7 +622,7 @@ button {
 }
 /*------------------- RESULT TAB LAYOUT -------------------*/
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
   .mobileHidden {
     display: none;
   }
