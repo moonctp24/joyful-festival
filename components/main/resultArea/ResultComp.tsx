@@ -15,7 +15,7 @@ const ResultComp = () => {
     <>
       <ResultTabComp selectedTabNum={selectedTabNum} />
       <div className="flex">
-        <div className={`${nowResultTabNum === 1 && "mobileHidden"}`}>
+        <div className={`${nowResultTabNum === 1 && "mobileHidden"} w-full`}>
           <ResultMapComp />
         </div>
         <div className={`${nowResultTabNum === 0 && "mobileHidden"}`}>

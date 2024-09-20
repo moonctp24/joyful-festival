@@ -28,7 +28,7 @@ const KakaoMap = () => {
           lat: 33.450701,
           lng: 126.570667,
         }}
-        style={{ width: "500px", height: "360px" }}
+        style={{ width: "100%", height: "360px" }}
         level={3} // 지도의 확대 레벨
       >
         {positions?.map((position, index) => (
