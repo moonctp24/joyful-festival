@@ -7,6 +7,7 @@ type Position = {
     lat: number;
     lng: number;
   };
+  save: boolean;
 };
 
 type CenterPosition = {
@@ -30,7 +31,6 @@ const KakaoMap = (props: KakaoMapProps) => {
     <div>
       <Map
         center={{
-          // 지도의 중심좌표
           lat: center_position.lat,
           lng: center_position.lng,
         }}
@@ -42,13 +42,17 @@ const KakaoMap = (props: KakaoMapProps) => {
             <MapMarker
               key={`${position.title}-${position.latlng.lat}-${position.latlng.lng}`}
               position={position.latlng} // 마커를 표시할 위치
-              image={{
-                src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커 이미지 주소
-                size: {
-                  width: 24,
-                  height: 35,
-                }, // 마커 이미지 크기
-              }}
+              image={
+                position.save
+                  ? {
+                      src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커 이미지 주소
+                      size: {
+                        width: 24,
+                        height: 35,
+                      }, // 마커 이미지 크기
+                    }
+                  : undefined // save가 false일 경우 image 프로퍼티 생략
+              }
               title={position.title} // 마커 타이틀
             />
           ))}
