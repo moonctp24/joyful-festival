@@ -1,4 +1,4 @@
-import KakaoMap from "@/components/KakaoMap";
+import KakaoMap from "@/components/contents/KakaoMap";
 
 const ResultMapComp = () => {
   const dummy_positions = [
