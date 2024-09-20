@@ -22,7 +22,9 @@ const ResultComp = () => {
         >
           <ResultMapComp />
         </div>
-        <div className={`${nowResultTabNum === 0 && "mobileHidden"}`}>
+        <div
+          className={`${nowResultTabNum === 0 && "mobileHidden"}  mt-4 mb-4`}
+        >
           <ResultListComp />
         </div>
       </div>
