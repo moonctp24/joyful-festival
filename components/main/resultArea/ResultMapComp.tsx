@@ -49,16 +49,16 @@ const ResultMapComp = () => {
     lng: 128.07133845435104,
   };
   const scaleLevel = 14; // 지도의 확대 레벨 14: 한국 전체(제주도 포함), 13: 제주도 제외 한국전체, 3: 완전 국소
-  const mapSize = {
-    width: "100%",
-    height: "400px",
-  };
+  // const mapSize = {
+  //   width: "100%",
+  //   height: "400px",
+  // };
   return (
     <KakaoMap
       positions={dummy_positions}
       center_position={center_position}
       scaleLevel={scaleLevel}
-      mapSize={mapSize}
+      // mapSize={mapSize}
     />
   );
 };

@@ -19,14 +19,14 @@ type KakaoMapProps = {
   positions: Position[];
   center_position: CenterPosition;
   scaleLevel: number;
-  mapSize: {
-    width: string;
-    height: string;
-  };
+  // mapSize: {
+  //   width: string;
+  //   height: string;
+  // };
 };
 
 const KakaoMap = (props: KakaoMapProps) => {
-  const { positions, center_position, scaleLevel, mapSize } = props;
+  const { positions, center_position, scaleLevel } = props;
   return (
     <div className="w-full h-[400px] md:h-[600px]">
       <Map
