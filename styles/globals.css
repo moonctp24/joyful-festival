@@ -626,9 +626,12 @@ button {
   .mobileHidden {
     display: none;
   }
+  .mapWidth {
+    width: 100%;
+  }
 }
 @media screen and (min-width: 699px) {
-  .webHalf {
+  .mapWidth {
     width: 50%;
   }
   .webOverflow {
