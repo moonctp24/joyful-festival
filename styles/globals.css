@@ -631,4 +631,8 @@ button {
   .webHalf {
     width: 50%;
   }
+  .webOverflow {
+    height: 600px;
+    overflow-y: auto;
+  }
 }

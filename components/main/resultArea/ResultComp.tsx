@@ -25,7 +25,7 @@ const ResultComp = () => {
         <div
           className={`${
             nowResultTabNum === 0 && "mobileHidden"
-          } webHalf mt-4 mb-4 p-1 ml-4`}
+          } webHalf webOverflow mt-4 mb-4 p-1 ml-4`}
         >
           <ResultListComp />
         </div>
