@@ -1,6 +1,10 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true, // https://nextjs.org/docs/advanced-features/compiler#minification
+  images: {
+    // 구글이미지 가져온 임시 hostname 등록
+    domains: ["lh3.googleusercontent.com", "localhost"],
+  },
   async headers() {
     return [
       {
