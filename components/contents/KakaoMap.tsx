@@ -28,13 +28,13 @@ type KakaoMapProps = {
 const KakaoMap = (props: KakaoMapProps) => {
   const { positions, center_position, scaleLevel, mapSize } = props;
   return (
-    <div>
+    <div className="w-full h-[400px] md:h-[600px]">
       <Map
         center={{
           lat: center_position.lat,
           lng: center_position.lng,
         }}
-        style={{ width: mapSize.width, height: mapSize.height }}
+        style={{ width: "100%", height: "100%" }}
         level={scaleLevel}
       >
         {!!positions &&
