@@ -635,4 +635,10 @@ button {
     height: 600px;
     overflow-y: auto;
   }
+  .webMarginR {
+    margin-right: 16px;
+  }
+  .webMarginL {
+    margin-left: 16px;
+  }
 }
