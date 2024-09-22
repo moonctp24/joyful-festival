@@ -18,12 +18,14 @@ const ResultComp = () => {
         <div
           className={`${
             nowResultTabNum === 1 && "mobileHidden"
-          } w-full mt-4 mb-4`}
+          } webHalf mt-4 mb-4 p-1 mr-4`}
         >
           <ResultMapComp />
         </div>
         <div
-          className={`${nowResultTabNum === 0 && "mobileHidden"}  mt-4 mb-4`}
+          className={`${
+            nowResultTabNum === 0 && "mobileHidden"
+          } webHalf mt-4 mb-4 p-1 ml-4`}
         >
           <ResultListComp />
         </div>
