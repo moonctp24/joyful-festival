@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 
-const ResultTabComp = (props: any) => {
+type ResultTabCompProps = {
+  selectedTabNum: (tabNum: number) => void;
+};
+const ResultTabComp = (props: ResultTabCompProps) => {
   const [resultTab, setResultTab] = useState(0);
 
   const selectedTabNum = () => {

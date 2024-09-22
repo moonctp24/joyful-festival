@@ -6,8 +6,14 @@ import DropBoxComp from "../comm/select/DropBoxComp";
 import MainTabComp from "./MainTabComp";
 import ResultComp from "./resultArea/ResultComp";
 
+type RootState = {
+  nowTab: {
+    nowTabNum: number; // `nowTabNum` is always a number
+  };
+};
+
 const MainComp: NextPage = () => {
-  const nowTab = useSelector((state: any) => state.nowTab.nowTabNum);
+  const nowTab = useSelector((state: RootState) => state.nowTab.nowTabNum);
 
   const ingYNList = ["개최중여부 선택", "개최중", "개최예정"];
   const monthList = ["개최시기 선택", "1월", "2월", "3월", "4월"];
