@@ -3,7 +3,11 @@ const nextConfig = {
   swcMinify: true, // https://nextjs.org/docs/advanced-features/compiler#minification
   images: {
     // 구글이미지 가져온 임시 hostname 등록
-    domains: ["lh3.googleusercontent.com", "localhost"],
+    domains: [
+      "lh3.googleusercontent.com",
+      "kfescdn.visitkorea.or.kr",
+      "localhost",
+    ],
   },
   async headers() {
     return [
