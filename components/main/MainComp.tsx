@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import DropBoxComp from "../comm/select/DropBoxComp";
 import MainTabComp from "./MainTabComp";
 import ResultComp from "./resultArea/ResultComp";
+import InputComp from "../comm/inputComp/InputComp";
 
 type RootState = {
   nowTab: {
@@ -33,6 +34,18 @@ const MainComp: NextPage = () => {
     }
   }, [nowTab]);
 
+  /**
+   * GET INPUT TEXT FROM CHILDREN COMPONENT
+   * @param inputTxt 입력한 텍스트
+   */
+  const getInputTxt = (inputTxt: string) => {
+    console.log(inputTxt);
+    // const nameParam = {
+    //   name: inputTxt,
+    // };
+    // fetchData("get", "/api/medicineMng/getMdcnList", nameParam, true); // 의약품 리스트 조회 통신
+  };
+
   return (
     <>
       <MainTabComp />
@@ -43,6 +56,8 @@ const MainComp: NextPage = () => {
           <DropBoxComp stateList={monthList} />
           <div className="space10 webHidden" />
           <DropBoxComp stateList={regionList} />
+          <div className="space10 webHidden" />
+          <InputComp getInputTxt={getInputTxt} />
         </div>
         <div className="space20 webHidden" />
         <button className="h-10 webNavBttn">검색</button>
