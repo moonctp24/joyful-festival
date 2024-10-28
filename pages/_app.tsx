@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 
 import Layout from "@/components/layout/Layout";
 import store from "@/store";
+import CommModalGroup from "@/components/popup/CommModalGroup";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>joyful-festival</title>
       </Head>
       <Provider store={store}>
+        <CommModalGroup />
         <Layout>
           <Component {...pageProps} />
         </Layout>
