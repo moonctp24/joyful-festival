@@ -3,6 +3,7 @@ import PopupButton from "./popupLayout/PopupButton";
 import PopupContent from "./popupLayout/PopupContent";
 import PopupTitle from "./popupLayout/PopupTitle";
 import { confirmAction } from "@/store/modal/confirm-slice";
+import { RootState } from "@/store";
 
 const type = "confirm";
 
@@ -10,10 +11,10 @@ const type = "confirm";
  * alert popup when error or warning occured
  */
 const CommConfirm = () => {
-  const isOpen = useSelector((state: any) => state.confirm.isOpen);
-  const title = useSelector((state: any) => state.confirm.title);
-  const cont = useSelector((state: any) => state.confirm.cont);
-  const width = useSelector((state: any) => state.confirm.width);
+  const isOpen = useSelector((state: RootState) => state.confirm.isOpen);
+  const title = useSelector((state: RootState) => state.confirm.title);
+  const cont = useSelector((state: RootState) => state.confirm.cont);
+  const width = useSelector((state: RootState) => state.confirm.width);
 
   return (
     <div className="popup_common">

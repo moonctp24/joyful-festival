@@ -3,6 +3,7 @@ import { alertAction } from "store/modal/alert-slice";
 import PopupButton from "./popupLayout/PopupButton";
 import PopupContent from "./popupLayout/PopupContent";
 import PopupTitle from "./popupLayout/PopupTitle";
+import { RootState } from "@/store";
 
 const type = "alert";
 
@@ -10,10 +11,10 @@ const type = "alert";
  * alert popup when error or warning occured
  */
 const CommAlert = () => {
-  const isOpen = useSelector((state: any) => state.alert.isOpen);
-  const title = useSelector((state: any) => state.alert.title);
-  const cont = useSelector((state: any) => state.alert.cont);
-  const width = useSelector((state: any) => state.alert.width);
+  const isOpen = useSelector((state: RootState) => state.alert.isOpen);
+  const title = useSelector((state: RootState) => state.alert.title);
+  const cont = useSelector((state: RootState) => state.alert.cont);
+  const width = useSelector((state: RootState) => state.alert.width);
 
   return (
     <div className="popup_common">
