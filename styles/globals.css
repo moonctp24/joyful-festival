@@ -182,6 +182,10 @@ textarea {
 textarea::placeholder {
   color: #888888;
 }
+.comm_input_default {
+  display: inline-block;
+  width: 100%;
+}
 /* ----- input ----- */
 
 /*------------------- HEADER LAYOUT -------------------*/
@@ -479,13 +483,13 @@ textarea::placeholder {
 .select_txt {
   position: absolute;
   display: block;
-  padding: 10px 41px 10px 15px;
+  padding: 16px 15px;
   width: 90%;
   /* width: 350px; */
   white-space: nowrap; /* 줄바꿈 금지하고 */
   text-overflow: ellipsis; /* 말줄임표 사용 */
   overflow: hidden;
-  height: 40px;
+  height: 50px;
   color: #666;
   font-weight: 700;
   text-align: left;

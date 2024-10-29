@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-const InputComp = (props: any) => {
+type CommImputType = {
+  defaultPlaceholder: string;
+  getInputTxt: (inputTxt: string) => void;
+};
+const InputComp = (props: CommImputType) => {
   const [searchWord, setSearchWord] = useState(""); // 검색할 단어
 
   /**
@@ -11,13 +15,11 @@ const InputComp = (props: any) => {
   };
 
   return (
-    <div className="w-[352px] h-[39px] webFilterBtn">
+    <div className="webFilterBtn">
       <input
         type="text"
-        id="itemSrch"
-        // ref={itemSrch}
-        className="ipt"
-        placeholder="검색"
+        className="comm_input_default"
+        placeholder={props.defaultPlaceholder}
         value={searchWord}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setSearchWord(e.target.value)

@@ -50,16 +50,16 @@ const MainComp: NextPage = () => {
     <>
       <MainTabComp />
       <div className="webFlex">
-        <div className="webFlex mr-3">
+        <div className="webFlex webMarginR">
           <DropBoxComp stateList={ingYNList} />
-          <div className="space10 webHidden" />
+          <div className="space20 webHidden" />
           <DropBoxComp stateList={monthList} />
-          <div className="space10 webHidden" />
+          <div className="space20 webHidden" />
           <DropBoxComp stateList={regionList} />
-          <div className="space10 webHidden" />
-          <InputComp getInputTxt={getInputTxt} />
+          <div className="space20 webHidden" />
+          <InputComp defaultPlaceholder={"축제명"} getInputTxt={getInputTxt} />
         </div>
-        <div className="space20 webHidden" />
+        <div className="space30 webHidden" />
         <button className="h-10 webNavBttn">검색</button>
       </div>
       <div className="space30" />
