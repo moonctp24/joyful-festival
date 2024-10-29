@@ -58,7 +58,10 @@ const PopupButton = ({ type, action, btnOpt, btmPd }: Data) => {
           </>
         ) : type === "confirm" ? (
           <>
-            <button className="btn_gray" onClick={() => dispatch(action.closeModal())}>
+            <button
+              className="btn_gray"
+              onClick={() => dispatch(action.closeModal())}
+            >
               취소
             </button>
             <button
@@ -74,7 +77,10 @@ const PopupButton = ({ type, action, btnOpt, btmPd }: Data) => {
           </>
         ) : type === "multi" ? (
           <>
-            <button className="btn_white" onClick={() => dispatch(action.closeModal())}>
+            <button
+              className="btn_white"
+              onClick={() => dispatch(action.closeModal())}
+            >
               취소
             </button>
             {(!!btnOpt?.hidden && btnOpt.hidden) || (
