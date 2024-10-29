@@ -1,6 +1,12 @@
+import { customAction } from "@/store/modal/custom-slice";
+import { useDispatch } from "react-redux";
+
 const Header = () => {
+  const dispatch = useDispatch();
+
   const hamClick = () => {
     console.log("ham clicked");
+    dispatch(customAction.openModal({ cont: "jjj" }));
   };
   return (
     <>
