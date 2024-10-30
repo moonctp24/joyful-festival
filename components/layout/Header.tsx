@@ -1,13 +1,22 @@
-import { customAction } from "@/store/modal/custom-slice";
-import { useDispatch } from "react-redux";
+import HamComp from "../hamburger/HamComp";
+import { useState } from "react";
 
 const Header = () => {
-  const dispatch = useDispatch();
+  const [hamOpen, setHamOpen] = useState(false);
 
+  /**
+   * Open Hamburger
+   */
   const hamClick = () => {
-    console.log("ham clicked");
-    dispatch(customAction.openModal({ cont: "jjj" }));
+    setHamOpen(true);
   };
+  /**
+   * Close Hamburer
+   */
+  const hamClose = () => {
+    setHamOpen(false);
+  };
+
   return (
     <>
       <nav className="navbar">
@@ -70,6 +79,7 @@ const Header = () => {
         <path d="M-3 0.999966L390 1" stroke="#1E90FF" strokeWidth="0.2"></path>
       </svg>
       {/* 가로선 */}
+      <HamComp isOpen={hamOpen} close={hamClose} />
     </>
   );
 };
