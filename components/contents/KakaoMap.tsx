@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
@@ -10,54 +11,80 @@ type Position = {
   };
   save: boolean;
 };
-
 type CenterPosition = {
   lat: number;
   lng: number;
 };
-
 type KakaoMapProps = {
   positions: Position[];
   center_position: CenterPosition;
   scaleLevel: number;
-  // mapSize: {
-  //   width: string;
-  //   height: string;
-  // };
 };
 
 const KakaoMap = (props: KakaoMapProps) => {
   const { positions, center_position, scaleLevel } = props;
   const [mapData, setMapData] = useState<{
-    level: number;
+    mapZoomLevel: number;
     position: {
       lat: number;
       lng: number;
     };
-  }>();
-  const [bounds, setBounds] = useState<{
     topLat: number;
     bottomLat: number;
     leftLng: number;
     rightLng: number;
   }>();
-  const [result, setResult] = useState(scaleLevel);
+
+  const setNewMapData = (mapInfo: any) => {
+    setMapData({
+      mapZoomLevel: mapInfo.getLevel(),
+      position: {
+        lat: mapInfo.getCenter().getLat(),
+        lng: mapInfo.getCenter().getLng(),
+      },
+      topLat: mapInfo.getBounds().getNorthEast().getLat(),
+      bottomLat: mapInfo.getBounds().getSouthWest().getLat(),
+      rightLng: mapInfo.getBounds().getNorthEast().getLng(),
+      leftLng: mapInfo.getBounds().getSouthWest().getLng(),
+    });
+  };
 
   useEffect(() => {
-    console.log(mapData && mapData.position.lat);
-    console.log(mapData && mapData.position.lng);
-    console.log(mapData && mapData.level);
+    // console.log(mapData && mapData.position.lat);
+    // console.log(mapData && mapData.position.lng);
+    // console.log(mapData && mapData.mapZoomLevel);
 
-    console.log(bounds && bounds.topLat);
-    console.log(bounds && bounds.bottomLat);
-    console.log(bounds && bounds.leftLng);
-    console.log(bounds && bounds.rightLng);
+    // console.log(mapData && mapData.topLat);
+    // console.log(mapData && mapData.bottomLat);
+    // console.log(mapData && mapData.leftLng);
+    // console.log(mapData && mapData.rightLng);
 
-    console.log(result);
+    // console.log(mapData && mapData.mapZoomLevel);
+
+    const AXIOS = axios.create({
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+    });
+
+    const sendData = {
+      centerLat: mapData ? mapData.position.lat : center_position.lat, // 위도(가로선)
+      centerLng: mapData ? mapData.position.lng : center_position.lng, // 경도(세로선)
+      topLat: mapData ? mapData.topLat : 0,
+      bottomLat: mapData ? mapData.bottomLat : 0,
+      leftLng: mapData ? mapData.leftLng : 0,
+      rightLng: mapData ? mapData.rightLng : 0,
+      mapZoomLevel: mapData ? mapData.mapZoomLevel : scaleLevel,
+    };
+
+    // const res = AXIOS.post(
+    //   "http://ec2-3-34-40-99.ap-northeast-2.compute.amazonaws.com/festivals",
+    //   JSON.stringify(sendData),
+    // );
+    console.log(sendData, mapData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapData]);
-  useEffect(() => {
-    console.log(result);
-  }, [result]);
 
   return (
     <div className="w-full h-[400px] md:h-[600px]">
@@ -69,29 +96,17 @@ const KakaoMap = (props: KakaoMapProps) => {
         style={{ width: "100%", height: "100%" }}
         level={scaleLevel}
         onDragEnd={(map) => {
-          setMapData({
-            level: map.getLevel(),
-            position: {
-              lat: map.getCenter().getLat(),
-              lng: map.getCenter().getLng(),
-            },
-          });
-          setBounds({
-            topLat: map.getBounds().getNorthEast().getLat(),
-            bottomLat: map.getBounds().getSouthWest().getLat(),
-            rightLng: map.getBounds().getNorthEast().getLng(),
-            leftLng: map.getBounds().getSouthWest().getLng(),
-          });
+          setNewMapData(map);
         }}
         // onBoundsChanged={(map) => {
-        //   const bounds = map.getBounds();
+        //   const mapData = map.getBounds();
         //   setBounds({
-        //     sw: bounds.getSouthWest().toString(),
-        //     ne: bounds.getNorthEast().toString(),
+        //     sw: mapData.getSouthWest().toString(),
+        //     ne: mapData.getNorthEast().toString(),
         //   });
         // }}
         onZoomChanged={(map) => {
-          setResult(map.getLevel());
+          setNewMapData(map);
         }}
       >
         {!!positions &&
