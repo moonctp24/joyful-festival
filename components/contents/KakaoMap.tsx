@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 // position과 center_position 타입 정의
@@ -27,6 +28,37 @@ type KakaoMapProps = {
 
 const KakaoMap = (props: KakaoMapProps) => {
   const { positions, center_position, scaleLevel } = props;
+  const [mapData, setMapData] = useState<{
+    level: number;
+    position: {
+      lat: number;
+      lng: number;
+    };
+  }>();
+  const [bounds, setBounds] = useState<{
+    topLat: number;
+    bottomLat: number;
+    leftLng: number;
+    rightLng: number;
+  }>();
+  const [result, setResult] = useState(scaleLevel);
+
+  useEffect(() => {
+    console.log(mapData && mapData.position.lat);
+    console.log(mapData && mapData.position.lng);
+    console.log(mapData && mapData.level);
+
+    console.log(bounds && bounds.topLat);
+    console.log(bounds && bounds.bottomLat);
+    console.log(bounds && bounds.leftLng);
+    console.log(bounds && bounds.rightLng);
+
+    console.log(result);
+  }, [mapData]);
+  useEffect(() => {
+    console.log(result);
+  }, [result]);
+
   return (
     <div className="w-full h-[400px] md:h-[600px]">
       <Map
@@ -36,6 +68,31 @@ const KakaoMap = (props: KakaoMapProps) => {
         }}
         style={{ width: "100%", height: "100%" }}
         level={scaleLevel}
+        onDragEnd={(map) => {
+          setMapData({
+            level: map.getLevel(),
+            position: {
+              lat: map.getCenter().getLat(),
+              lng: map.getCenter().getLng(),
+            },
+          });
+          setBounds({
+            topLat: map.getBounds().getNorthEast().getLat(),
+            bottomLat: map.getBounds().getSouthWest().getLat(),
+            rightLng: map.getBounds().getNorthEast().getLng(),
+            leftLng: map.getBounds().getSouthWest().getLng(),
+          });
+        }}
+        // onBoundsChanged={(map) => {
+        //   const bounds = map.getBounds();
+        //   setBounds({
+        //     sw: bounds.getSouthWest().toString(),
+        //     ne: bounds.getNorthEast().toString(),
+        //   });
+        // }}
+        onZoomChanged={(map) => {
+          setResult(map.getLevel());
+        }}
       >
         {!!positions &&
           positions.map((position) => (
