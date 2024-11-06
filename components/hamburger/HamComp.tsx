@@ -45,6 +45,7 @@ const HamComp = (prop: HamProps) => {
                   X
                 </p>
               </div>
+              <div className="w-full h-5/6"></div>
               {isLogin ? (
                 <div>
                   <svg
@@ -67,11 +68,11 @@ const HamComp = (prop: HamProps) => {
                   </p>
                 </div>
               ) : (
-                <div>
-                  <p className="w-[126px] h-[55px] absolute left-[15px] top-[739px] text-xl text-left text-black">
+                <div className="flex h-7">
+                  <p className="w-[126px] h-[55px] text-xl text-left text-black">
                     로그인
                   </p>
-                  <p className="w-[126px] h-[55px] absolute left-[83px] top-[739px] text-xl text-left text-black">
+                  <p className="w-[126px] h-[55px] text-xl text-left text-black">
                     회원가입
                   </p>
                 </div>
