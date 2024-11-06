@@ -61,13 +61,6 @@ const KakaoMap = (props: KakaoMapProps) => {
 
     // console.log(mapData && mapData.mapZoomLevel);
 
-    const AXIOS = axios.create({
-      withCredentials: true,
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-      },
-    });
-
     const sendData = {
       centerLat: mapData ? mapData.position.lat : center_position.lat, // 위도(가로선)
       centerLng: mapData ? mapData.position.lng : center_position.lng, // 경도(세로선)
@@ -78,11 +71,11 @@ const KakaoMap = (props: KakaoMapProps) => {
       mapZoomLevel: mapData ? mapData.mapZoomLevel : scaleLevel,
     };
 
-    // const res = AXIOS.post(
-    //   "http://ec2-3-34-40-99.ap-northeast-2.compute.amazonaws.com/festivals",
-    //   JSON.stringify(sendData),
-    // );
-    console.log(sendData, mapData);
+    axios
+      .get("/api/getFestivalList", { params: sendData })
+      .then((response) => console.log(response))
+      .catch((error) => console.error(error));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapData]);
 
