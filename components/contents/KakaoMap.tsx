@@ -20,7 +20,7 @@ type KakaoMapProps = {
   scaleLevel: number;
 };
 
-const KakaoMap = (props: KakaoMapProps) => {
+const KakaoMap = (props: any) => {
   const dummy_data = {
     status: true,
     code: 200,
@@ -396,7 +396,7 @@ const KakaoMap = (props: KakaoMapProps) => {
         }}
       >
         {!!positions &&
-          positions.map((position) => (
+          positions.map((position: any) => (
             <MapMarker
               key={`${position.title}-${position.lat}-${position.lng}`}
               position={{
