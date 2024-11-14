@@ -136,7 +136,7 @@ input[type="number"] {
   vertical-align: middle;
 }
 input[type="text"]:focus {
-  border: 1px solid #e4d1ff;
+  border: 1px solid #1e90ff;
   background: #fff;
 }
 
