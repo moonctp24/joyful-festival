@@ -20,7 +20,7 @@ type KakaoMapProps = {
   scaleLevel: number;
 };
 
-const KakaoMap = (props: any) => {
+const KakaoMap = (props: KakaoMapProps) => {
   const dummy_data = {
     status: true,
     code: 200,
@@ -303,8 +303,8 @@ const KakaoMap = (props: any) => {
   };
   const { center_position, scaleLevel } = props;
   const [positions, setPositions] = useState(props.positions);
-  const [pingClickYN, setPingClickYN] = useState(false);
   const [posDtlInfo, setPosDtlInfo] = useState(null);
+  const [pingOpen, setPingOpen] = useState(false); // Open YN Festival Detail Popup
   const [mapData, setMapData] = useState<{
     mapZoomLevel: number;
     position: {
@@ -366,10 +366,18 @@ const KakaoMap = (props: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapData]);
 
+  /**
+   * Open Festival Detail Popup
+   */
   const pingClicked = (pos: any) => {
-    console.log("clicked");
-    setPingClickYN(true);
+    setPingOpen(true);
     setPosDtlInfo(pos);
+  };
+  /**
+   * Close Festival Detail Popup
+   */
+  const pingClosed = () => {
+    setPingOpen(false);
   };
 
   return (
@@ -396,7 +404,7 @@ const KakaoMap = (props: any) => {
         }}
       >
         {!!positions &&
-          positions.map((position: any) => (
+          positions.map((position) => (
             <MapMarker
               key={`${position.title}-${position.lat}-${position.lng}`}
               position={{
@@ -420,7 +428,11 @@ const KakaoMap = (props: any) => {
             />
           ))}
       </Map>
-      <FestivalDetail pingClickYN={pingClickYN} dtlInfo={posDtlInfo} />
+      <FestivalDetail
+        isOpen={pingOpen}
+        close={pingClosed}
+        dtlInfo={posDtlInfo}
+      />
     </div>
   );
 };
