@@ -327,10 +327,10 @@ const KakaoMap = (props: KakaoMapProps) => {
       mapZoomLevel: scaleLevel,
     };
     if (sendData.topLat !== "0") {
-      console.log(sendData);
       axios
         .get("/api/getFestivalList", { params: sendData })
         .then((response) => {
+          console.log("맵 초기 데이터 조회 결과");
           console.log(response);
           // getNewPingList(response);
         })
@@ -374,6 +374,7 @@ const KakaoMap = (props: KakaoMapProps) => {
     axios
       .get("/api/getFestivalList", { params: sendData })
       .then((response) => {
+        console.log("맵 재조회 데이터 결과");
         console.log(response);
         getNewPingList(response);
       })
