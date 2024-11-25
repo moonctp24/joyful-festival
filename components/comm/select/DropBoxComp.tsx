@@ -24,7 +24,6 @@ const DropBoxComp = (props: { stateList: Array<string> }) => {
   );
 
   const answerStateValueSelectedHandler = (state: string) => {
-    // console.log(state);
     setSelectedValue(state);
     setIsClicked(!isClicked);
   };
