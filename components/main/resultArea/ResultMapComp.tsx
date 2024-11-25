@@ -136,14 +136,13 @@ const ResultMapComp = () => {
     lat: 36.05373270747189,
     lng: 128.07133845435104,
   };
-  const scaleLevel = 13; // 지도의 확대 레벨 14: 한국 전체(제주도 포함), 13: 제주도 제외 한국전체, 9: 도시 하나, 3: 골목길 보임
+  const scaleLevel = 14; // 지도의 확대 레벨 14: 한국 전체(제주도 포함), 13: 제주도 제외 한국전체, 9: 도시 하나, 3: 골목길 보임
   // const mapSize = {
   //   width: "100%",
   //   height: "400px",
   // };
   return (
     <KakaoMap
-      positions={dummy_positions}
       center_position={center_position}
       scaleLevel={scaleLevel}
       // mapSize={mapSize}

@@ -15,12 +15,11 @@ type CenterPosition = {
   lng: number;
 };
 type KakaoMapProps = {
-  positions: Position[];
   center_position: CenterPosition;
   scaleLevel: number;
 };
 
-const KakaoMap = (props: any) => {
+const KakaoMap = (props: KakaoMapProps) => {
   const dummy_data = {
     status: true,
     code: 200,
@@ -302,7 +301,7 @@ const KakaoMap = (props: any) => {
     error: null,
   };
   const { center_position, scaleLevel } = props;
-  const [positions, setPositions] = useState(props.positions);
+  const [positions, setPositions] = useState(null);
   const [posDtlInfo, setPosDtlInfo] = useState(null);
   const [pingOpen, setPingOpen] = useState(false); // Open YN Festival Detail Popup
   const [mapData, setMapData] = useState<{
@@ -317,6 +316,29 @@ const KakaoMap = (props: any) => {
     rightLng: number;
   }>();
 
+  useEffect(() => {
+    const sendData = {
+      centerLat: center_position.lat, // 위도(가로선)
+      centerLng: center_position.lng, // 경도(세로선)
+      topLat: "39.601565561258276",
+      bottomLat: "32.322965365041576",
+      leftLng: "123.71480989020876",
+      rightLng: "132.83825363000508",
+      mapZoomLevel: scaleLevel,
+    };
+    if (sendData.topLat !== "0") {
+      console.log(sendData);
+      axios
+        .get("/api/getFestivalList", { params: sendData })
+        .then((response) => {
+          console.log(response);
+          // getNewPingList(response);
+        })
+        .catch((error) => console.error(error));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const setNewMapData = (mapInfo: any) => {
     setMapData({
       mapZoomLevel: mapInfo.getLevel(),
@@ -329,34 +351,25 @@ const KakaoMap = (props: any) => {
       rightLng: mapInfo.getBounds().getNorthEast().getLng(),
       leftLng: mapInfo.getBounds().getSouthWest().getLng(),
     });
-  };
-
-  const getNewPingList = (res: any) => {
-    // console.log(res.data);
-    setPositions(res ? res.data.data : dummy_data.data);
-  };
-
-  useEffect(() => {
-    // console.log(mapData && mapData.position.lat);
-    // console.log(mapData && mapData.position.lng);
-    // console.log(mapData && mapData.mapZoomLevel);
-
-    // console.log(mapData && mapData.topLat);
-    // console.log(mapData && mapData.bottomLat);
-    // console.log(mapData && mapData.leftLng);
-    // console.log(mapData && mapData.rightLng);
-
-    // console.log(mapData && mapData.mapZoomLevel);
-
     const sendData = {
-      centerLat: mapData ? mapData.position.lat : center_position.lat, // 위도(가로선)
-      centerLng: mapData ? mapData.position.lng : center_position.lng, // 경도(세로선)
-      topLat: mapData ? mapData.topLat : 0,
-      bottomLat: mapData ? mapData.bottomLat : 0,
-      leftLng: mapData ? mapData.leftLng : 0,
-      rightLng: mapData ? mapData.rightLng : 0,
-      mapZoomLevel: mapData ? mapData.mapZoomLevel : scaleLevel,
+      centerLat: mapInfo.getCenter().getLat(), // 위도(가로선)
+      centerLng: mapInfo.getCenter().getLng(), // 경도(세로선)
+      topLat: mapInfo.getBounds().getNorthEast().getLat(),
+      bottomLat: mapInfo.getBounds().getSouthWest().getLat(),
+      leftLng: mapInfo.getBounds().getSouthWest().getLng(),
+      rightLng: mapInfo.getBounds().getNorthEast().getLng(),
+      mapZoomLevel: mapInfo.getLevel(),
     };
+
+    // const sendData = {
+    //   centerLat: mapData ? mapData.position.lat : center_position.lat, // 위도(가로선)
+    //   centerLng: mapData ? mapData.position.lng : center_position.lng, // 경도(세로선)
+    //   topLat: mapData ? mapData.topLat : 0,
+    //   bottomLat: mapData ? mapData.bottomLat : 0,
+    //   leftLng: mapData ? mapData.leftLng : 0,
+    //   rightLng: mapData ? mapData.rightLng : 0,
+    //   mapZoomLevel: mapData ? mapData.mapZoomLevel : scaleLevel,
+    // };
 
     axios
       .get("/api/getFestivalList", { params: sendData })
@@ -365,9 +378,45 @@ const KakaoMap = (props: any) => {
         getNewPingList(response);
       })
       .catch((error) => console.error(error));
+  };
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mapData]);
+  const getNewPingList = (res: any) => {
+    // console.log(res.data);
+    setPositions(res ? res.data.data : dummy_data.data);
+  };
+
+  // useEffect(() => {
+  //   // console.log(mapData && mapData.position.lat);
+  //   // console.log(mapData && mapData.position.lng);
+  //   // console.log(mapData && mapData.mapZoomLevel);
+
+  //   // console.log(mapData && mapData.topLat);
+  //   // console.log(mapData && mapData.bottomLat);
+  //   // console.log(mapData && mapData.leftLng);
+  //   // console.log(mapData && mapData.rightLng);
+
+  //   // console.log(mapData && mapData.mapZoomLevel);
+
+  //   const sendData = {
+  //     centerLat: mapData ? mapData.position.lat : center_position.lat, // 위도(가로선)
+  //     centerLng: mapData ? mapData.position.lng : center_position.lng, // 경도(세로선)
+  //     topLat: mapData ? mapData.topLat : 0,
+  //     bottomLat: mapData ? mapData.bottomLat : 0,
+  //     leftLng: mapData ? mapData.leftLng : 0,
+  //     rightLng: mapData ? mapData.rightLng : 0,
+  //     mapZoomLevel: mapData ? mapData.mapZoomLevel : scaleLevel,
+  //   };
+
+  //   axios
+  //     .get("/api/getFestivalList", { params: sendData })
+  //     .then((response) => {
+  //       console.log(response);
+  //       getNewPingList(response);
+  //     })
+  //     .catch((error) => console.error(error));
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [mapData]);
 
   /**
    * Open Festival Detail Popup
