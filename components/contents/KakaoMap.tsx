@@ -333,7 +333,7 @@ const KakaoMap = (props: any) => {
 
   const getNewPingList = (res: any) => {
     // console.log(res.data);
-    setPositions(res.data);
+    setPositions(res ? res.data.data : dummy_data.data);
   };
 
   useEffect(() => {
@@ -360,7 +360,10 @@ const KakaoMap = (props: any) => {
 
     axios
       .get("/api/getFestivalList", { params: sendData })
-      .then((response) => getNewPingList(dummy_data))
+      .then((response) => {
+        console.log(response);
+        getNewPingList(response);
+      })
       .catch((error) => console.error(error));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -403,30 +406,32 @@ const KakaoMap = (props: any) => {
           setNewMapData(map);
         }}
       >
-        {!!positions &&
-          positions.map((position: any) => (
-            <MapMarker
-              key={`${position.title}-${position.lat}-${position.lng}`}
-              position={{
-                lat: Number(position.lat),
-                lng: Number(position.lng),
-              }} // 마커를 표시할 위치
-              image={
-                position.save
-                  ? {
-                      src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커 이미지 주소
-                      size: {
-                        width: 24,
-                        height: 35,
-                      }, // 마커 이미지 크기
-                    }
-                  : undefined // save가 false일 경우 image 프로퍼티 생략
-              }
-              title={position.title} // 마커 타이틀
-              clickable={true} // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-              onClick={() => pingClicked(position)}
-            />
-          ))}
+        {positions &&
+          positions.map((position: any) => {
+            return (
+              <MapMarker
+                key={`${position.title}-${position.lat}-${position.lng}`}
+                position={{
+                  lat: Number(position.lat),
+                  lng: Number(position.lng),
+                }} // 마커를 표시할 위치
+                image={
+                  position.save
+                    ? {
+                        src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커 이미지 주소
+                        size: {
+                          width: 24,
+                          height: 35,
+                        }, // 마커 이미지 크기
+                      }
+                    : undefined // save가 false일 경우 image 프로퍼티 생략
+                }
+                title={position.title} // 마커 타이틀
+                clickable={true} // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+                onClick={() => pingClicked(position)}
+              />
+            );
+          })}
       </Map>
       <FestivalDetail
         isOpen={pingOpen}
