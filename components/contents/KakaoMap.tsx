@@ -301,7 +301,7 @@ const KakaoMap = (props: KakaoMapProps) => {
     error: null,
   };
   const { center_position, scaleLevel } = props;
-  const [positions, setPositions] = useState(null);
+  const [positions, setPositions] = useState<any[]>([]);
   const [posDtlInfo, setPosDtlInfo] = useState(null);
   const [pingOpen, setPingOpen] = useState(false); // Open YN Festival Detail Popup
   const [mapData, setMapData] = useState<{
