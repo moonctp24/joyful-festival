@@ -1,7 +1,16 @@
+/* eslint-disable @next/next/no-img-element */
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Map, MapMarker } from "react-kakao-maps-sdk";
+import ClusterImg from "@/public/images/ClusterImg.png";
+
+import {
+  CustomOverlayMap,
+  Map,
+  MapMarker,
+  MarkerClusterer,
+} from "react-kakao-maps-sdk";
 import FestivalDetail from "./FestivalDetail";
+import Image from "next/image";
 
 // position과 center_position 타입 정의
 type Position = {
@@ -340,6 +349,7 @@ const KakaoMap = (props: KakaoMapProps) => {
   }, []);
 
   const setNewMapData = (mapInfo: any) => {
+    console.log(mapInfo.getLevel());
     setMapData({
       mapZoomLevel: mapInfo.getLevel(),
       position: {
@@ -382,7 +392,7 @@ const KakaoMap = (props: KakaoMapProps) => {
   };
 
   const getNewPingList = (res: any) => {
-    // console.log(res.data);
+    console.log(res.data.data);
     setPositions(res ? res.data.data : dummy_data.data);
   };
 
@@ -456,32 +466,78 @@ const KakaoMap = (props: KakaoMapProps) => {
           setNewMapData(map);
         }}
       >
-        {positions &&
-          positions.map((position: any) => {
-            return (
-              <MapMarker
-                key={`${position.title}-${position.lat}-${position.lng}`}
-                position={{
-                  lat: Number(position.lat),
-                  lng: Number(position.lng),
-                }} // 마커를 표시할 위치
-                image={
-                  position.save
-                    ? {
-                        src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커 이미지 주소
-                        size: {
-                          width: 24,
-                          height: 35,
-                        }, // 마커 이미지 크기
-                      }
-                    : undefined // save가 false일 경우 image 프로퍼티 생략
-                }
-                title={position.title} // 마커 타이틀
-                clickable={true} // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-                onClick={() => pingClicked(position)}
-              />
-            );
-          })}
+        {mapData?.mapZoomLevel && mapData.mapZoomLevel > 9
+          ? positions &&
+            positions.map((position: any, idx: number) => {
+              return (
+                <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
+                  key={`${idx}-${position.lat}-${position.lng}`}
+                  position={{
+                    lat: Number(position.lat),
+                    lng: Number(position.lng),
+                  }} // 마커를 표시할 위치
+                >
+                  {/* 커스텀 오버레이에 표시할 내용입니다 */}
+                  <div
+                    style={{
+                      position: "relative",
+                      width: "20px",
+                      height: "20px",
+                    }}
+                  >
+                    {/* 이미지 */}
+                    <Image
+                      src={ClusterImg}
+                      alt="ClusterImg"
+                      width={25}
+                      height={20}
+                      style={{ display: "block" }}
+                    />
+                    {/* 텍스트 */}
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        color: "#fff", // 텍스트 색상
+                        fontSize: "12px",
+                        fontWeight: "bold",
+                        textShadow: "0 0 5px rgba(0, 0, 0, 0.5)", // 가독성 증가
+                      }}
+                    >
+                      {position.numPoints}
+                    </span>
+                  </div>
+                </CustomOverlayMap>
+              );
+            })
+          : positions &&
+            positions.map((position: any) => {
+              return (
+                <MapMarker
+                  key={`${position.id}-${position.lat}-${position.lng}`}
+                  position={{
+                    lat: Number(position.lat),
+                    lng: Number(position.lng),
+                  }} // 마커를 표시할 위치
+                  image={
+                    position.save
+                      ? {
+                          src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커 이미지 주소
+                          size: {
+                            width: 24,
+                            height: 35,
+                          }, // 마커 이미지 크기
+                        }
+                      : undefined // save가 false일 경우 image 프로퍼티 생략
+                  }
+                  title={position.title} // 마커 타이틀
+                  clickable={true} // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
+                  onClick={() => pingClicked(position)}
+                />
+              );
+            })}
       </Map>
       <FestivalDetail
         isOpen={pingOpen}
