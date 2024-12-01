@@ -1,5 +1,5 @@
 // pages/api/festivals.js
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -21,10 +21,14 @@ export default async function handler(
         { headers: req.headers },
       );
       res.status(200).json(response.data);
-    } catch (error: any) {
-      res
-        .status(error.response?.status || 500)
-        .json({ message: "Error fetching data" });
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        res
+          .status(error.response?.status || 500)
+          .json({ message: "Error fetching data" });
+      } else {
+        res.status(500).json({ message: "Unknown error occurred" });
+      }
     }
   } else {
     res.setHeader("Allow", ["GET"]);

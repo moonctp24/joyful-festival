@@ -3,21 +3,36 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ClusterImg from "@/public/images/ClusterImg.png";
 
-import {
-  CustomOverlayMap,
-  Map,
-  MapMarker,
-  MarkerClusterer,
-} from "react-kakao-maps-sdk";
+import { CustomOverlayMap, Map, MapMarker } from "react-kakao-maps-sdk";
 import FestivalDetail from "./FestivalDetail";
 import Image from "next/image";
 
+// MapInfo Type 정의
+type LatLng = {
+  getLat: () => number;
+  getLng: () => number;
+};
+type Bounds = {
+  getNorthEast: () => LatLng;
+  getSouthWest: () => LatLng;
+};
+type MapInfo = {
+  getCenter: () => LatLng;
+  getBounds: () => Bounds;
+  getLevel: () => number;
+};
+
 // position과 center_position 타입 정의
 type Position = {
+  id: string; // 고유 ID
   title: string;
   lat: number;
   lng: number;
   save: boolean;
+  numPoints: number;
+  detailAt: string; // 상세 위치
+  startDate: string; // 시작 날짜 (ISO 형식 문자열)
+  endDate: string; // 종료 날짜 (선택적 속성)
 };
 type CenterPosition = {
   lat: number;
@@ -27,7 +42,13 @@ type KakaoMapProps = {
   center_position: CenterPosition;
   scaleLevel: number;
 };
-
+type DtlInfo = {
+  title: string;
+  save: boolean;
+  detailAt: string; // 상세 위치
+  startDate: string; // 시작 날짜 (ISO 형식 문자열)
+  endDate?: string; // 종료 날짜 (선택적 속성)
+};
 const KakaoMap = (props: KakaoMapProps) => {
   const dummy_data = {
     status: true,
@@ -310,8 +331,14 @@ const KakaoMap = (props: KakaoMapProps) => {
     error: null,
   };
   const { center_position, scaleLevel } = props;
-  const [positions, setPositions] = useState<any[]>([]);
-  const [posDtlInfo, setPosDtlInfo] = useState(null);
+  const [positions, setPositions] = useState<Position[]>([]);
+  const [posDtlInfo, setPosDtlInfo] = useState<DtlInfo>({
+    title: "",
+    save: false,
+    detailAt: "",
+    startDate: "",
+    endDate: "",
+  });
   const [pingOpen, setPingOpen] = useState(false); // Open YN Festival Detail Popup
   const [mapData, setMapData] = useState<{
     mapZoomLevel: number;
@@ -348,8 +375,7 @@ const KakaoMap = (props: KakaoMapProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setNewMapData = (mapInfo: any) => {
-    console.log(mapInfo.getLevel());
+  const setNewMapData = (mapInfo: MapInfo) => {
     setMapData({
       mapZoomLevel: mapInfo.getLevel(),
       position: {
@@ -391,47 +417,16 @@ const KakaoMap = (props: KakaoMapProps) => {
       .catch((error) => console.error(error));
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getNewPingList = (res: any) => {
     console.log(res.data.data);
     setPositions(res ? res.data.data : dummy_data.data);
   };
 
-  // useEffect(() => {
-  //   // console.log(mapData && mapData.position.lat);
-  //   // console.log(mapData && mapData.position.lng);
-  //   // console.log(mapData && mapData.mapZoomLevel);
-
-  //   // console.log(mapData && mapData.topLat);
-  //   // console.log(mapData && mapData.bottomLat);
-  //   // console.log(mapData && mapData.leftLng);
-  //   // console.log(mapData && mapData.rightLng);
-
-  //   // console.log(mapData && mapData.mapZoomLevel);
-
-  //   const sendData = {
-  //     centerLat: mapData ? mapData.position.lat : center_position.lat, // 위도(가로선)
-  //     centerLng: mapData ? mapData.position.lng : center_position.lng, // 경도(세로선)
-  //     topLat: mapData ? mapData.topLat : 0,
-  //     bottomLat: mapData ? mapData.bottomLat : 0,
-  //     leftLng: mapData ? mapData.leftLng : 0,
-  //     rightLng: mapData ? mapData.rightLng : 0,
-  //     mapZoomLevel: mapData ? mapData.mapZoomLevel : scaleLevel,
-  //   };
-
-  //   axios
-  //     .get("/api/getFestivalList", { params: sendData })
-  //     .then((response) => {
-  //       console.log(response);
-  //       getNewPingList(response);
-  //     })
-  //     .catch((error) => console.error(error));
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [mapData]);
-
   /**
    * Open Festival Detail Popup
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pingClicked = (pos: any) => {
     setPingOpen(true);
     setPosDtlInfo(pos);
@@ -468,7 +463,7 @@ const KakaoMap = (props: KakaoMapProps) => {
       >
         {mapData?.mapZoomLevel && mapData.mapZoomLevel > 9
           ? positions &&
-            positions.map((position: any, idx: number) => {
+            positions.map((position: Position, idx: number) => {
               return (
                 <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
                   key={`${idx}-${position.lat}-${position.lng}`}
@@ -513,7 +508,7 @@ const KakaoMap = (props: KakaoMapProps) => {
               );
             })
           : positions &&
-            positions.map((position: any) => {
+            positions.map((position: Position) => {
               return (
                 <MapMarker
                   key={`${position.id}-${position.lat}-${position.lng}`}

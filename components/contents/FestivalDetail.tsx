@@ -3,10 +3,17 @@ import Image from "next/image";
 import Heart from "../comm/like/Heart";
 import { useState } from "react";
 
+type DtlInfo = {
+  title: string;
+  save: boolean;
+  detailAt: string; // 상세 위치
+  startDate: string; // 시작 날짜 (ISO 형식 문자열)
+  endDate?: string; // 종료 날짜 (선택적 속성)
+};
 type FstvDtlProps = {
   isOpen: boolean;
   close: (isOpen: boolean) => void;
-  dtlInfo: any;
+  dtlInfo: DtlInfo;
 };
 const FestivalDetail = (props: FstvDtlProps) => {
   const { dtlInfo } = props;
