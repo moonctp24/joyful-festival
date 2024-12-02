@@ -15,8 +15,8 @@ const HamComp = (prop: HamProps) => {
             className="popup"
             style={{ display: prop.isOpen ? "block" : "none", zIndex: 930 }}
           >
-            <div className="w-11/12 h-full overflow-hidden bg-white">
-              <div className="flex">
+            <div className="w-full h-full overflow-hidden bg-white">
+              <div className="flex h-full">
                 {isLogin ? (
                   <div className="flex">
                     <p className="w-[65px] h-6 text-xl text-left text-black">
@@ -28,16 +28,14 @@ const HamComp = (prop: HamProps) => {
                   </div>
                 ) : (
                   <div className="flex">
-                    <p className="w-[65px] h-6 text-xl text-left text-black">
-                      로그인
-                    </p>
-                    <p className="w-[87px] h-[25px]  text-[17px] text-left text-black">
+                    <p className="text-xl text-black">로그인</p>
+                    <p className="text-[17px] text-black align-bottom">
                       해주세요
                     </p>
                   </div>
                 )}
                 <p
-                  className="w-6 h-[25px] text-xl text-center text-black"
+                  className="w-6 h-[25px] text-xl text-center text-black absolute right-3"
                   onClick={() => {
                     prop.close(false);
                   }}
@@ -45,7 +43,7 @@ const HamComp = (prop: HamProps) => {
                   X
                 </p>
               </div>
-              <div className="w-full h-5/6"></div>
+              <div className="w-full h-[300px]">ㅇㅇㅇ</div>
               {isLogin ? (
                 <div>
                   <svg
@@ -68,11 +66,11 @@ const HamComp = (prop: HamProps) => {
                   </p>
                 </div>
               ) : (
-                <div className="flex h-7">
-                  <p className="w-[126px] h-[55px] text-xl text-left text-black">
+                <div className="flex">
+                  <p className="h-[55px] text-xl text-left text-black">
                     로그인
                   </p>
-                  <p className="w-[126px] h-[55px] text-xl text-left text-black">
+                  <p className="h-[55px] text-xl text-left text-black">
                     회원가입
                   </p>
                 </div>
