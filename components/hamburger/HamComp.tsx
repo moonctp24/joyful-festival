@@ -5,7 +5,7 @@ type HamProps = {
   close: (isOpen: boolean) => void;
 };
 const HamComp = (prop: HamProps) => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   return (
     <>
@@ -62,13 +62,19 @@ const HamComp = (prop: HamProps) => {
                       stroke-width="0.5"
                     ></path>
                   </svg>
-                  <p className="text-xl text-left text-black cursor-pointer font-semibold">
+                  <p
+                    className="text-xl text-left text-black cursor-pointer font-semibold"
+                    onClick={() => setIsLogin(false)}
+                  >
                     로그아웃
                   </p>
                 </div>
               ) : (
                 <div className="flex">
-                  <p className="text-xl text-left text-black cursor-pointer font-semibold">
+                  <p
+                    className="text-xl text-left text-black cursor-pointer font-semibold"
+                    onClick={() => setIsLogin(true)}
+                  >
                     로그인
                   </p>
                   <p className="text-xl text-left text-black cursor-pointer font-semibold">
