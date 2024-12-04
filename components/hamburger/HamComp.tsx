@@ -5,7 +5,7 @@ type HamProps = {
   close: (isOpen: boolean) => void;
 };
 const HamComp = (prop: HamProps) => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
     <>
@@ -15,27 +15,29 @@ const HamComp = (prop: HamProps) => {
             className="popup"
             style={{ display: prop.isOpen ? "block" : "none", zIndex: 930 }}
           >
-            <div className="w-full h-full overflow-hidden bg-white">
+            <div className="w-full h-full overflow-hidden bg-white p-4">
               <div className="flex h-full">
                 {isLogin ? (
                   <div className="flex">
-                    <p className="w-[65px] h-6 text-xl text-left text-black">
+                    <p className="text-xl text-left text-black pr-0 font-semibold">
                       권예림
                     </p>
-                    <p className="w-9 h-[25px] text-[17px] text-left text-black">
+                    <p className="text-[17px] text-left text-black font-normal pl-0 mt-2.5">
                       님
                     </p>
                   </div>
                 ) : (
-                  <div className="flex">
-                    <p className="text-xl text-black">로그인</p>
-                    <p className="text-[17px] text-black align-bottom">
+                  <div className="flex h-12">
+                    <p className="text-xl text-black pr-0 font-semibold">
+                      로그인
+                    </p>
+                    <p className="text-[17px] text-black pl-0 mt-2.5 font-normal ">
                       해주세요
                     </p>
                   </div>
                 )}
                 <p
-                  className="w-6 h-[25px] text-xl text-center text-black absolute right-3"
+                  className="text-xl text-center text-black absolute right-3 cursor-pointer"
                   onClick={() => {
                     prop.close(false);
                   }}
@@ -43,16 +45,15 @@ const HamComp = (prop: HamProps) => {
                   X
                 </p>
               </div>
-              <div className="w-full h-[300px]">ㅇㅇㅇ</div>
+              <div className="w-full h-[500px]">ㅇㅇㅇ</div>
               {isLogin ? (
                 <div>
                   <svg
-                    width="390"
+                    width="full"
                     height="1"
                     viewBox="0 0 390 1"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="absolute left-[-2.75px] top-[729.75px]"
                     preserveAspectRatio="none"
                   >
                     <path
@@ -61,16 +62,16 @@ const HamComp = (prop: HamProps) => {
                       stroke-width="0.5"
                     ></path>
                   </svg>
-                  <p className="w-[126px] h-[55px] absolute left-[15px] top-[739px] text-xl text-left text-black">
+                  <p className="text-xl text-left text-black cursor-pointer font-semibold">
                     로그아웃
                   </p>
                 </div>
               ) : (
                 <div className="flex">
-                  <p className="h-[55px] text-xl text-left text-black">
+                  <p className="text-xl text-left text-black cursor-pointer font-semibold">
                     로그인
                   </p>
-                  <p className="h-[55px] text-xl text-left text-black">
+                  <p className="text-xl text-left text-black cursor-pointer font-semibold">
                     회원가입
                   </p>
                 </div>
