@@ -9,12 +9,14 @@ const Header = () => {
    */
   const hamClick = () => {
     setHamOpen(true);
+    document.body.style.overflow = "hidden";
   };
   /**
    * Close Hamburer
    */
   const hamClose = () => {
     setHamOpen(false);
+    document.body.style.overflow = "unset";
   };
 
   return (

@@ -430,12 +430,14 @@ const KakaoMap = (props: KakaoMapProps) => {
   const pingClicked = (pos: any) => {
     setPingOpen(true);
     setPosDtlInfo(pos);
+    document.body.style.overflow = "hidden";
   };
   /**
    * Close Festival Detail Popup
    */
   const pingClosed = () => {
     setPingOpen(false);
+    document.body.style.overflow = "unset";
   };
 
   return (
@@ -476,16 +478,16 @@ const KakaoMap = (props: KakaoMapProps) => {
                   <div
                     style={{
                       position: "relative",
-                      width: "20px",
-                      height: "20px",
+                      width: "30px",
+                      height: "30px",
                     }}
                   >
                     {/* 이미지 */}
                     <Image
                       src={ClusterImg}
                       alt="ClusterImg"
-                      width={25}
-                      height={20}
+                      width={30}
+                      height={30}
                       style={{ display: "block" }}
                     />
                     {/* 텍스트 */}
