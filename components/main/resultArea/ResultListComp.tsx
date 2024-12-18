@@ -1,7 +1,9 @@
 import Card from "@/components/contents/Card";
 
-const ResultListComp = () => {
-  const festivalInfo = [
+const ResultListComp = (props: any) => {
+  const festivalInfo = props.festList;
+  console.log(festivalInfo);
+  const festivalDummy = [
     {
       festivalImg:
         "https://lh3.googleusercontent.com/proxy/hmB710GCcPlxDLDU5BmhAlwsQTWR42OP_ANkM4W2CsuL4WF-_CYxYIINGqFBepNM00QC1l2UvLKzu6yb_02tRq54iRcl5SYw6YB-hIszGL4SgvsTXozMUA",
@@ -63,7 +65,7 @@ const ResultListComp = () => {
   return (
     <div className="flex flex-wrap justify-between">
       {!!festivalInfo &&
-        festivalInfo.map((f, index) => {
+        festivalInfo.map((f: any, index: number) => {
           return <Card key={index} festivalInfo={f} />;
         })}
     </div>

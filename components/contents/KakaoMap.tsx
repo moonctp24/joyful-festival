@@ -39,6 +39,7 @@ type CenterPosition = {
   lng: number;
 };
 type KakaoMapProps = {
+  festivalList(data: any): unknown;
   center_position: CenterPosition;
   scaleLevel: number;
 };
@@ -50,6 +51,10 @@ type DtlInfo = {
   endDate?: string; // 종료 날짜 (선택적 속성)
 };
 const KakaoMap = (props: KakaoMapProps) => {
+  const shareFestivalList = (data: any) => {
+    // console.log("child");
+    props.festivalList(data);
+  };
   const dummy_data = {
     status: true,
     code: 200,
@@ -421,6 +426,7 @@ const KakaoMap = (props: KakaoMapProps) => {
   const getNewPingList = (res: any) => {
     console.log(res.data.data);
     setPositions(res ? res.data.data : dummy_data.data);
+    shareFestivalList(res.data.data);
   };
 
   /**

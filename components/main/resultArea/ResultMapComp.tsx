@@ -1,6 +1,6 @@
 import KakaoMap from "@/components/contents/KakaoMap";
 
-const ResultMapComp = () => {
+const ResultMapComp = (props: any) => {
   // const dummy_positions = [
   //   {
   //     id: "1d5543cb-b486-4ca4-b99c-2b4b9c0d13d8",
@@ -145,6 +145,7 @@ const ResultMapComp = () => {
     <KakaoMap
       center_position={center_position}
       scaleLevel={scaleLevel}
+      festivalList={props.festivalList}
       // mapSize={mapSize}
     />
   );
