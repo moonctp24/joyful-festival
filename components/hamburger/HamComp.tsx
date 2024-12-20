@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 type HamProps = {
@@ -6,6 +7,13 @@ type HamProps = {
 };
 const HamComp = (prop: HamProps) => {
   const [isLogin, setIsLogin] = useState(false);
+  const router = useRouter();
+
+  const goLogin = () => {
+    router.push("/acct/login");
+    // setIsLogin(true);
+    prop.close(false);
+  };
 
   return (
     <>
@@ -90,11 +98,7 @@ const HamComp = (prop: HamProps) => {
                     xmlns="http://www.w3.org/2000/svg"
                     preserveAspectRatio="none"
                   >
-                    <path
-                      d="M-2 0.5L391 0.500034"
-                      stroke="black"
-                      stroke-width="0.5"
-                    ></path>
+                    <path d="M-2 0.5L391 0.500034" stroke="black"></path>
                   </svg>
                   <p
                     className="text-xl text-left text-black cursor-pointer font-semibold"
@@ -107,7 +111,7 @@ const HamComp = (prop: HamProps) => {
                 <div className="flex">
                   <p
                     className="text-xl text-left text-black cursor-pointer font-semibold"
-                    onClick={() => setIsLogin(true)}
+                    onClick={() => goLogin()}
                   >
                     로그인
                   </p>
