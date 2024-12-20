@@ -39,6 +39,7 @@ type CenterPosition = {
   lng: number;
 };
 type KakaoMapProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   festivalList(data: any): unknown;
   center_position: CenterPosition;
   scaleLevel: number;
@@ -51,6 +52,7 @@ type DtlInfo = {
   endDate?: string; // 종료 날짜 (선택적 속성)
 };
 const KakaoMap = (props: KakaoMapProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const shareFestivalList = (data: any) => {
     // console.log("child");
     props.festivalList(data);
@@ -359,6 +361,10 @@ const KakaoMap = (props: KakaoMapProps) => {
 
   useEffect(() => {
     const sendData = {
+      ing: "00", // 개최중여부 -  00:전체, 01:개최중, 02:개최예정
+      month: "0", // 개최시기 - 0:전체, 1:1월, 2:2월, ..., 12:12월
+      region: "", // 지역명
+      word: "", // 검색어
       centerLat: center_position.lat, // 위도(가로선)
       centerLng: center_position.lng, // 경도(세로선)
       topLat: "39.601565561258276",
@@ -373,7 +379,7 @@ const KakaoMap = (props: KakaoMapProps) => {
         .then((response) => {
           console.log("맵 초기 데이터 조회 결과");
           console.log(response);
-          // getNewPingList(response);
+          getNewPingList(response);
         })
         .catch((error) => console.error(error));
     }
