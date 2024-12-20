@@ -1,8 +1,10 @@
+import { useRouter } from "next/router";
 import HamComp from "../hamburger/HamComp";
 import { useState } from "react";
 
 const Header = () => {
   const [hamOpen, setHamOpen] = useState(false);
+  const router = useRouter();
 
   /**
    * Open Hamburger
@@ -23,7 +25,9 @@ const Header = () => {
     <>
       <nav className="navbar">
         <div className="navbar__logo">
-          <a href="">LOGO</a>
+          <a className="cursor-pointer" onClick={() => router.push("/")}>
+            LOGO
+          </a>
         </div>
         <ul className="navbar__icons">
           <li>
