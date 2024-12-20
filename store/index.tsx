@@ -4,6 +4,7 @@ import nowTabSlice from "./nowTab/nowTab-slice";
 import alertSlice from "./modal/alert-slice";
 import confirmSlice from "./modal/confirm-slice";
 import customSlice from "./modal/custom-slice";
+import mapSlice from "./map/map-slice";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     alert: alertSlice.reducer,
     confirm: confirmSlice.reducer,
     custom: customSlice.reducer,
+    map: mapSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
