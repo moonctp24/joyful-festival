@@ -14,6 +14,11 @@ const HamComp = (prop: HamProps) => {
     // setIsLogin(true);
     prop.close(false);
   };
+  const goSignup = () => {
+    router.push("/acct/signup"); //signup
+    // setIsLogin(true);
+    prop.close(false);
+  };
 
   return (
     <>
@@ -115,7 +120,10 @@ const HamComp = (prop: HamProps) => {
                   >
                     로그인
                   </p>
-                  <p className="text-xl text-left text-black cursor-pointer font-semibold">
+                  <p
+                    className="text-xl text-left text-black cursor-pointer font-semibold"
+                    onClick={() => goSignup()}
+                  >
                     회원가입
                   </p>
                 </div>
