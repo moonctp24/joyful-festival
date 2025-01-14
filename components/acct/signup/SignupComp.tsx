@@ -1,5 +1,7 @@
+import { loginAction } from "@/store/login/login-slice";
 import { alertAction } from "@/store/modal/alert-slice";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -7,6 +9,8 @@ const SignupComp = () => {
   // const [emailInput, setEmailInput] = useState("test@email.com");
   // const [passwordInput, setPasswordInput] = useState("test123!!");
   const dispatch = useDispatch();
+
+  const router = useRouter();
 
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
@@ -63,29 +67,6 @@ const SignupComp = () => {
     }
   };
 
-  // useEffect(() => {
-  //   postResult();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [code, response]);
-
-  // const postResult = useCallback(() => {
-  //   console.log(`code :: ${code} / response :: `, response);
-  //   if (response && code == "200") {
-  //     dispatch(
-  //       loginAction.login({
-  //         // isLogin: true,
-  //         userEmail: response.adminEmail,
-  //         userName: response.adminName,
-  //         adminJwt: response.adminJwt,
-  //       }),
-  //     );
-  //     router.push("/");
-  //   } else {
-  //     dispatch(alertAction.openModal({ "오류가 발생 했습니다.": String }));
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [code, response]);
-
   // 회원가입 버튼 클릭 -> 회원가입 로직 실행
   const signupBtn = async () => {
     // 정홥성 확인이 완료되면 '회원가입'로직 실행
@@ -96,14 +77,24 @@ const SignupComp = () => {
         password: passwordInput,
         passwordConfirm: passwordConfirmInput,
       };
-
       axios
         .post("/api/acct/signup", data)
         .then((response) => {
           console.log("회원가입 결과");
-          console.log(response.data.message);
+          console.log(response.data);
           if (response.data.code === 200) {
             // getNewPingList(response);
+            const loginData = response.data.data;
+            dispatch(
+              loginAction.login({
+                userEmail: emailInput,
+                userName: nameInput,
+                accessToken: loginData.accessToken,
+                refreshToken: loginData.refreshToken,
+              }),
+            );
+            dispatch(alertAction.openModal({ cont: response.data.message }));
+            router.push("/");
           } else {
             dispatch(alertAction.openModal({ cont: response.data.message }));
           }
