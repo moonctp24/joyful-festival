@@ -5,9 +5,11 @@ import alertSlice from "./modal/alert-slice";
 import confirmSlice from "./modal/confirm-slice";
 import customSlice from "./modal/custom-slice";
 import mapSlice from "./map/map-slice";
+import loginSlice from "./login/login-slice";
 
 const store = configureStore({
   reducer: {
+    login: loginSlice.reducer,
     nowTab: nowTabSlice.reducer,
     alert: alertSlice.reducer,
     confirm: confirmSlice.reducer,
