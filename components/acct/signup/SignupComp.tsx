@@ -1,14 +1,21 @@
 import { alertAction } from "@/store/modal/alert-slice";
-import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 const SignupComp = () => {
   // const [emailInput, setEmailInput] = useState("test@email.com");
   // const [passwordInput, setPasswordInput] = useState("test123!!");
+  const dispatch = useDispatch();
 
+  const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const [passwordConfirmInput, setPasswordConfirmInput] = useState("");
+
+  const nameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNameInput(e.target.value);
+  };
 
   const emailChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmailInput(e.target.value);
@@ -16,6 +23,95 @@ const SignupComp = () => {
 
   const passwordChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordInput(e.target.value);
+  };
+
+  const passwordConfirmChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setPasswordConfirmInput(e.target.value);
+  };
+
+  // 각 입력값에 대한 정합성 확인
+  const validationCheck = () => {
+    if (!nameInput) {
+      dispatch(alertAction.openModal({ cont: "이름이 입력되지 않았습니다" }));
+      return false;
+    }
+    if (!emailInput) {
+      dispatch(alertAction.openModal({ cont: "이메일이 입력되지 않았습니다" }));
+      return false;
+    }
+    if (!passwordInput) {
+      dispatch(
+        alertAction.openModal({ cont: "비밀번호가 입력되지 않았습니다" }),
+      );
+      return false;
+    }
+    if (!passwordConfirmInput) {
+      dispatch(
+        alertAction.openModal({ cont: "비밀번호 확인이 입력되지 않았습니다" }),
+      );
+      return false;
+    }
+    return true;
+  };
+
+  // 비밀번호 입력 영역에서 Enter 키 누르면 자동 로그인 버튼 클릭로직
+  const autoLoginHandler = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      signupBtn();
+    }
+  };
+
+  // useEffect(() => {
+  //   postResult();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [code, response]);
+
+  // const postResult = useCallback(() => {
+  //   console.log(`code :: ${code} / response :: `, response);
+  //   if (response && code == "200") {
+  //     dispatch(
+  //       loginAction.login({
+  //         // isLogin: true,
+  //         userEmail: response.adminEmail,
+  //         userName: response.adminName,
+  //         adminJwt: response.adminJwt,
+  //       }),
+  //     );
+  //     router.push("/");
+  //   } else {
+  //     dispatch(alertAction.openModal({ "오류가 발생 했습니다.": String }));
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [code, response]);
+
+  // 회원가입 버튼 클릭 -> 회원가입 로직 실행
+  const signupBtn = async () => {
+    // 정홥성 확인이 완료되면 '회원가입'로직 실행
+    if (validationCheck()) {
+      let data = {
+        name: nameInput,
+        email: emailInput,
+        password: passwordInput,
+        passwordConfirm: passwordConfirmInput,
+      };
+
+      axios
+        .post("/api/acct/signup", data)
+        .then((response) => {
+          console.log("회원가입 결과");
+          console.log(response.data.message);
+          if (response.data.code === 200) {
+            // getNewPingList(response);
+          } else {
+            dispatch(alertAction.openModal({ cont: response.data.message }));
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   return (
@@ -27,9 +123,9 @@ const SignupComp = () => {
             <input
               type="text"
               placeholder="이름을 입력해 주세요"
-              value={emailInput}
-              data-key="emailInput"
-              onChange={emailChangeHandler}
+              value={nameInput}
+              data-key="nameInput"
+              onChange={nameChangeHandler}
             />
             <input
               type="text"
@@ -48,13 +144,15 @@ const SignupComp = () => {
             />
             <input
               type="password"
-              placeholder="비밀번호"
-              value={passwordInput}
-              data-key="passwordInput"
-              onChange={passwordChangeHandler}
-              // onKeyDown={autoLoginHandler}
+              placeholder="비밀번호 확인"
+              value={passwordConfirmInput}
+              data-key="passwordConfirmInput"
+              onChange={passwordConfirmChangeHandler}
+              onKeyDown={autoLoginHandler}
             />
-            <button className="h-11">회원가입</button>
+            <button className="h-11" onClick={signupBtn}>
+              회원가입
+            </button>
           </div>
         </div>
       </div>
