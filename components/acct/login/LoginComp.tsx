@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 const LoginComp = () => {
   // const [emailInput, setEmailInput] = useState("test@email.com");
   // const [passwordInput, setPasswordInput] = useState("test123!!");
+  const router = useRouter();
 
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -40,24 +41,14 @@ const LoginComp = () => {
               // onKeyDown={autoLoginHandler}
             />
             <button className="h-11">로그인</button>
-            <div className="flex">
-              <p
-                className="h-3.5 text-xs text-right text-black cursor-pointer"
-                onClick={() => {
-                  // router.push("/nauth/findpw");
-                }}
-              >
-                회원가입
-              </p>
-              <p
-                className="h-3.5 text-xs text-right text-black cursor-pointer"
-                onClick={() => {
-                  // router.push("/nauth/findpw");
-                }}
-              >
-                비밀번호 찾기
-              </p>
-            </div>
+            <p
+              className="w-[340px] h-3.5 text-xs text-right text-black cursor-pointer"
+              onClick={() => {
+                router.push("/acct/signup");
+              }}
+            >
+              회원가입
+            </p>
           </div>
         </div>
       </div>
