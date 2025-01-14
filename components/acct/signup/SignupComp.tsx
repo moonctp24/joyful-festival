@@ -71,7 +71,7 @@ const SignupComp = () => {
   const signupBtn = async () => {
     // 정홥성 확인이 완료되면 '회원가입'로직 실행
     if (validationCheck()) {
-      let data = {
+      const data = {
         name: nameInput,
         email: emailInput,
         password: passwordInput,
