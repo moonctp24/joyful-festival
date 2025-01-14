@@ -375,7 +375,7 @@ const KakaoMap = (props: KakaoMapProps) => {
     };
     if (sendData.topLat !== "0") {
       axios
-        .get("/api/getFestivalList", { params: sendData })
+        .get("/api/festival/getFestivalList", { params: sendData })
         .then((response) => {
           console.log("맵 초기 데이터 조회 결과");
           console.log(response);
@@ -419,7 +419,7 @@ const KakaoMap = (props: KakaoMapProps) => {
     // };
 
     axios
-      .get("/api/getFestivalList", { params: sendData })
+      .get("/api/festival/getFestivalList", { params: sendData })
       .then((response) => {
         console.log("맵 재조회 데이터 결과");
         console.log(response);
