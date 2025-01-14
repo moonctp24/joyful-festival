@@ -19,7 +19,7 @@
   opacity: 1;
 }
 .popup .popup_section {
-  left: 50%;
+  /* left: 50%; */
   top: 50%;
   margin-left: -50%; /*width의 반만큼 음수로*/
   /* margin-top: -150px; height의 반만큼 음수로 */

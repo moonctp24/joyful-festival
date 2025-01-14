@@ -35,6 +35,7 @@ const PopupContent = ({ type, content, cntOpt }: Data) => {
         <div className="TT_Box">
           <div className="ipbox">
             <div className="TT_ps">
+              {content}
               {/* <ViewEditHtml html={javaToHtml(content)} /> */}
             </div>
           </div>
