@@ -1,13 +1,31 @@
+import { RootState } from "@/store";
+import { loginAction } from "@/store/login/login-slice";
+import { alertAction } from "@/store/modal/alert-slice";
+import axios from "axios";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 type HamProps = {
   isOpen: boolean;
   close: (isOpen: boolean) => void;
 };
 const HamComp = (prop: HamProps) => {
-  const [isLogin, setIsLogin] = useState(false);
+  let isLoginYN = useSelector((state: RootState) => state.login.isLogin);
+  let token2 = useSelector((state: RootState) => state.login.accessToken);
+  const [isLogin, setIsLogin] = useState(isLoginYN);
+  const [token, setToken] = useState(token2);
+
   const router = useRouter();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let realLoginYN = localStorage.getItem("isLogin") === "Y";
+    let token3 = localStorage.getItem("accessToken");
+    setIsLogin(isLoginYN ? isLoginYN : realLoginYN);
+    setToken(token3 ? token3 : token2);
+  }, [isLoginYN, token2]);
 
   const goLogin = () => {
     router.push("/acct/login");
@@ -18,6 +36,30 @@ const HamComp = (prop: HamProps) => {
     router.push("/acct/signup"); //signup
     // setIsLogin(true);
     prop.close(false);
+  };
+
+  const goLogout = () => {
+    const data = {
+      token: token,
+    };
+    axios
+      .post("/api/acct/logout", data)
+      .then((response) => {
+        console.log("logout 결과");
+        console.log(response.data);
+        if (response.data.code === 200) {
+          // getNewPingList(response);
+          // const loginData = response.data.data;
+          dispatch(loginAction.logout());
+          // dispatch(alertAction.openModal({ cont: response.data.message }));
+          router.push("/");
+        } else {
+          dispatch(alertAction.openModal({ cont: response.data.message }));
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -107,7 +149,7 @@ const HamComp = (prop: HamProps) => {
                   </svg>
                   <p
                     className="text-xl text-left text-black cursor-pointer font-semibold"
-                    onClick={() => setIsLogin(false)}
+                    onClick={goLogout}
                   >
                     로그아웃
                   </p>

@@ -4,7 +4,7 @@ const initialLoginState = {
   isLogin: false,
   userEmail: null,
   userName: null,
-  accessToken: null,
+  accessToken: "",
   refreshToken: null,
 };
 
