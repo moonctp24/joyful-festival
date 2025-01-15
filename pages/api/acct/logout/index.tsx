@@ -5,7 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  let adminJwt = req.body.token;
+  const adminJwt = req.body.token;
 
   try {
     const response = await axios.delete(

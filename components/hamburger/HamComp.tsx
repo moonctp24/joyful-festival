@@ -11,8 +11,8 @@ type HamProps = {
   close: (isOpen: boolean) => void;
 };
 const HamComp = (prop: HamProps) => {
-  let isLoginYN = useSelector((state: RootState) => state.login.isLogin);
-  let token2 = useSelector((state: RootState) => state.login.accessToken);
+  const isLoginYN = useSelector((state: RootState) => state.login.isLogin);
+  const token2 = useSelector((state: RootState) => state.login.accessToken);
   const [isLogin, setIsLogin] = useState(isLoginYN);
   const [token, setToken] = useState(token2);
 
@@ -21,8 +21,8 @@ const HamComp = (prop: HamProps) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let realLoginYN = localStorage.getItem("isLogin") === "Y";
-    let token3 = localStorage.getItem("accessToken");
+    const realLoginYN = localStorage.getItem("isLogin") === "Y";
+    const token3 = localStorage.getItem("accessToken");
     setIsLogin(isLoginYN ? isLoginYN : realLoginYN);
     setToken(token3 ? token3 : token2);
   }, [isLoginYN, token2]);
