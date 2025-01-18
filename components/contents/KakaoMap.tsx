@@ -377,8 +377,8 @@ const KakaoMap = (props: KakaoMapProps) => {
       axios
         .get("/api/festival/getFestivalList", { params: sendData })
         .then((response) => {
-          console.log("맵 초기 데이터 조회 결과");
-          console.log(response);
+          // console.log("맵 초기 데이터 조회 결과");
+          // console.log(response);
           getNewPingList(response);
         })
         .catch((error) => console.error(error));
@@ -430,7 +430,7 @@ const KakaoMap = (props: KakaoMapProps) => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const getNewPingList = (res: any) => {
-    console.log(res.data.data);
+    // console.log(res.data.data);
     setPositions(res ? res.data.data : dummy_data.data);
     shareFestivalList(res.data.data);
   };

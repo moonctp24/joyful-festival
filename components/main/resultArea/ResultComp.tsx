@@ -1,15 +1,8 @@
 import { useState } from "react";
 
 import ResultListComp from "./ResultListComp";
-import ResultMapComp from "./ResultMapComp";
 import ResultTabComp from "./ResultTabComp";
-import { useSelector } from "react-redux";
-
-type RootState = {
-  nowTab: {
-    nowTabNum: number; // `nowTabNum` is always a number
-  };
-};
+import KakaoMap from "@/components/contents/KakaoMap";
 
 type Position = {
   id: string; // 고유 ID
@@ -25,19 +18,25 @@ type Position = {
 
 const ResultComp = () => {
   const [festList, setFesList] = useState<Position[]>([]);
-  const nowTab = useSelector((state: RootState) => state.nowTab.nowTabNum);
-  // console.log(nowTab);
   const [nowResultTabNum, setNowResultTabNum] = useState(0);
 
   const selectedTabNum = (tabNum: number) => {
     setNowResultTabNum(tabNum);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const festivalList = (festList: any) => {
     // console.log("parent");
     // console.log(festList);
     setFesList(festList);
   };
+
+  const center_position = {
+    // 지도의 중심좌표
+    lat: 36.05373270747189,
+    lng: 128.07133845435104,
+  };
+  const scaleLevel = 14;
 
   return (
     <>
@@ -48,7 +47,13 @@ const ResultComp = () => {
             nowResultTabNum === 1 && "mobileHidden"
           } mapWidth webMarginR mt-4 mb-4 p-1`}
         >
-          <ResultMapComp festivalList={festivalList} />
+          {/* <ResultMapComp festivalList={festivalList} /> */}
+          <KakaoMap
+            center_position={center_position}
+            scaleLevel={scaleLevel}
+            festivalList={festivalList}
+            // mapSize={mapSize}
+          />
         </div>
         <div
           className={`${
