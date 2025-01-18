@@ -13,8 +13,13 @@ type HamProps = {
 const HamComp = (prop: HamProps) => {
   const isLoginYN = useSelector((state: RootState) => state.login.isLogin);
   const token2 = useSelector((state: RootState) => state.login.accessToken);
+  const userName = useSelector((state: RootState) => state.login.userName);
+  const userEmail = useSelector((state: RootState) => state.login.userEmail);
+
   const [isLogin, setIsLogin] = useState(isLoginYN);
   const [token, setToken] = useState(token2);
+  const [name, setName] = useState(userName);
+  const [email, setEmail] = useState(userEmail);
 
   const router = useRouter();
 
@@ -22,9 +27,15 @@ const HamComp = (prop: HamProps) => {
 
   useEffect(() => {
     const realLoginYN = localStorage.getItem("isLogin") === "Y";
-    const token3 = localStorage.getItem("accessToken");
-    setIsLogin(isLoginYN ? isLoginYN : realLoginYN);
-    setToken(token3 ? token3 : token2);
+    const token3 = localStorage.getItem("accessToken") || "null";
+    const name2 = localStorage.getItem("userName") || "null";
+    const email2 = localStorage.getItem("userEmail") || "null";
+
+    setIsLogin(realLoginYN);
+    setToken(token3);
+    setName(name2);
+    setEmail(email2);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoginYN, token2]);
 
   const goLogin = () => {
@@ -75,7 +86,7 @@ const HamComp = (prop: HamProps) => {
                 {isLogin ? (
                   <div className="flex">
                     <p className="text-xl text-left text-black pr-0 font-semibold">
-                      권예림
+                      {name}
                     </p>
                     <p className="text-[17px] text-left text-black font-normal pl-0 mt-2.5">
                       님
@@ -103,9 +114,7 @@ const HamComp = (prop: HamProps) => {
               {isLogin ? (
                 <div className="w-full h-[500px]">
                   <div className="space20" />
-                  <p className="text-[15px] text-left text-black">
-                    kwontest@email.com
-                  </p>
+                  <p className="text-[15px] text-left text-black">{email}</p>
                   <p className="text-[15px] text-left text-[#9a9a9a]">
                     내 정보 수정 &gt;
                   </p>

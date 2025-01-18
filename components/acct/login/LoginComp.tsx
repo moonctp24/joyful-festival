@@ -64,7 +64,7 @@ const LoginComp = () => {
             dispatch(
               loginAction.login({
                 userEmail: emailInput,
-                // userName: nameInput,
+                userName: loginData.userName,
                 accessToken: loginData.accessToken,
                 refreshToken: loginData.refreshToken,
               }),
