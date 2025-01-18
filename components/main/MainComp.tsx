@@ -1,48 +1,86 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import DropBoxComp from "../comm/select/DropBoxComp";
 import MainTabComp from "./MainTabComp";
 import ResultComp from "./resultArea/ResultComp";
 import InputComp from "../comm/inputComp/InputComp";
 import axios from "axios";
-
-type RootState = {
-  nowTab: {
-    nowTabNum: number; // `nowTabNum` is always a number
-  };
-};
+import { ING_YN_LIST, MONTH_LIST } from "@/constants/CONST";
+import { RootState } from "@/store";
+import { mapAction } from "@/store/map/map-slice";
+import { alertAction } from "@/store/modal/alert-slice";
 
 const MainComp: NextPage = () => {
-  const nowTab = useSelector((state: RootState) => state.nowTab.nowTabNum);
+  const dispatch = useDispatch();
 
-  const ingYNList = ["개최중여부 선택", "개최중", "개최예정"];
-  const monthList = [
-    "개최시기 선택",
-    "1월",
-    "2월",
-    "3월",
-    "4월",
-    "1월",
-    "2월",
-    "3월",
-    "4월",
-  ];
-  const [regionList, setRegionList] = useState([
-    "지역 선택",
-    "서울",
-    "인천",
-    "부산",
-  ]);
+  const nowTab = useSelector((state: RootState) => state.nowTab.nowTabNum);
+  const ing = useSelector((state: RootState) => state.map.ing);
+  const month = useSelector((state: RootState) => state.map.month);
+  const region = useSelector((state: RootState) => state.map.region);
+  const word = useSelector((state: RootState) => state.map.word);
+
+  const centerLat = useSelector((state: RootState) => state.map.centerLat);
+  const centerLng = useSelector((state: RootState) => state.map.centerLng);
+  const topLat = useSelector((state: RootState) => state.map.topLat);
+  const bottomLat = useSelector((state: RootState) => state.map.bottomLat);
+  const leftLng = useSelector((state: RootState) => state.map.leftLng);
+  const rightLng = useSelector((state: RootState) => state.map.rightLng);
+  const mapZoomLevel = useSelector(
+    (state: RootState) => state.map.mapZoomLevel,
+  );
+
+  const [tmpIng, setTmpIng] = useState(ing);
+  const [tmpMonth, setTmpMonth] = useState(month);
+  const [tmpRegion, setTmpRegion] = useState(region);
+
+  const code1 = "ing";
+  const code2 = "month";
+  const code3 = "region";
+
+  // 진행여부 Drop Box Setting
+  const ingYNListText = ING_YN_LIST.map(
+    (i: { value: string; text: string }) => {
+      return i.text;
+    },
+  );
+
+  // 개최시기 Drop Box Setting
+  const monthListText = MONTH_LIST.map(
+    (ml: { value: number; text: string }) => {
+      return ml.text;
+    },
+  );
+
+  // 지역 Drop Box Setting
+  const [regionList, setRegionList] = useState(["지역 선택"]);
 
   useEffect(() => {
+    console.log("tab changed");
+    const finalregion = ["지역 선택"];
     // retrieve data if tab number is updated
     if (nowTab === 0) {
-      setRegionList(["지역 선택", "서울", "인천", "부산"]);
+      axios
+        .get("/api/festival/getRegion")
+        .then((response) => {
+          if (response.data.code === 200) {
+            const regionResult = response.data.data;
+            regionResult.map((r: any) => {
+              finalregion.push(r.name);
+            });
+          } else {
+            dispatch(alertAction.openModal({ cont: response.data.message }));
+          }
+          setRegionList(finalregion);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     } else {
       setRegionList(["나라 선택", "일본", "중국", "영국"]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nowTab]);
 
   /**
@@ -57,14 +95,43 @@ const MainComp: NextPage = () => {
    * 축제 검색 통신
    */
   const searchFestList = () => {
+    dispatch(
+      mapAction.newCondition({
+        ing: tmpIng,
+        month: tmpMonth,
+        region: tmpRegion,
+      }),
+    );
+    // dispatch(
+    //   mapAction.newCondition({
+    //     ing: tmpIng,
+    //     month: tmpMonth,
+    //     region: tmpRegion,
+    //   }),
+    // );
+    // dispatch(
+    //   mapAction.newCondition({
+    //     ing: tmpIng,
+    //     month: tmpMonth,
+    //     region: tmpRegion,
+    //   }),
+    // );
+
     const sendData = {
-      ing: "01", // 개최중여부 -  00:전체, 01:개최중, 02:개최예정
-      month: "3", // 개최시기 - 0:전체, 1:1월, 2:2월, ..., 12:12월
-      region: "부산", // 지역명
-      word: "불꽃축제", // 검색어
+      ing: tmpIng, // 개최중여부
+      month: tmpMonth, // 개최시기
+      region: tmpRegion, // 지역명
+      word: word, // 검색어
+      centerLat: centerLat, // 위도(가로선)
+      centerLng: centerLng, // 경도(세로선)
+      topLat: topLat,
+      bottomLat: bottomLat,
+      leftLng: leftLng,
+      rightLng: rightLng,
+      mapZoomLevel: mapZoomLevel,
     };
     axios
-      .get("/api/getFestivalList", { params: sendData })
+      .get("/api/festival/getFestivalList", { params: sendData })
       .then((response) => {
         console.log("맵 초기 데이터 조회 결과");
         console.log(response);
@@ -73,16 +140,50 @@ const MainComp: NextPage = () => {
       .catch((error) => console.error(error));
   };
 
+  const selectOption = (option: { code: string; value: string }) => {
+    const selectedCode = option.code;
+    console.log("reslect check:: ", option);
+    if (selectedCode === code1) {
+      const selectedIngValue = ING_YN_LIST.filter(
+        (i) => i.text === option.value,
+      ).map((o) => o.value);
+      setTmpIng(selectedIngValue[0]);
+    } else if (selectedCode === code2) {
+      const selectedMonthValue = MONTH_LIST.filter(
+        (i) => i.text === option.value,
+      ).map((o) => o.value);
+      setTmpMonth(selectedMonthValue[0]);
+    } else if (selectedCode === code3) {
+      setTmpRegion(option.value);
+    }
+  };
+
+  useEffect(() => {
+    console.log("ingYNListText changed", ingYNListText);
+  }, [ingYNListText]);
+
   return (
     <>
       <MainTabComp />
       <div className="webFlex">
         <div className="webFlex webMarginR">
-          <DropBoxComp stateList={ingYNList} />
+          <DropBoxComp
+            stateList={ingYNListText}
+            code={code1}
+            selectOption={selectOption}
+          />
           <div className="space20 webHidden" />
-          <DropBoxComp stateList={monthList} />
+          <DropBoxComp
+            stateList={monthListText}
+            code={code2}
+            selectOption={selectOption}
+          />
           <div className="space20 webHidden" />
-          <DropBoxComp stateList={regionList} />
+          <DropBoxComp
+            stateList={regionList}
+            code={code3}
+            selectOption={selectOption}
+          />
           <div className="space20 webHidden" />
           <InputComp defaultPlaceholder={"축제명"} getInputTxt={getInputTxt} />
         </div>
