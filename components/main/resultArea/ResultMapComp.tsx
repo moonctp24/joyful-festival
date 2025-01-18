@@ -1,3 +1,4 @@
+/*
 import KakaoMap from "@/components/contents/KakaoMap";
 
 const ResultMapComp = (props: any) => {
@@ -151,3 +152,4 @@ const ResultMapComp = (props: any) => {
   );
 };
 export default ResultMapComp;
+*/
