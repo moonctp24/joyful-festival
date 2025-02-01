@@ -12,7 +12,6 @@ const DropBoxComp = (props: {
 
   const [selectedValue, setSelectedValue] = useState(props.stateList[0]); // 현재 선택된 status
   useEffect(() => {
-    console.log("222222222222: ", props.stateList[0]);
     setSelectedValue(props.stateList[0]);
   }, [props.stateList]);
   const selectedStatusNm = props.stateList?.map(
@@ -35,7 +34,6 @@ const DropBoxComp = (props: {
 
   useEffect(() => {
     const rst = { code: props.code, value: selectedValue };
-    console.log("11111111: ", rst);
     props.selectOption(rst);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedValue]);
