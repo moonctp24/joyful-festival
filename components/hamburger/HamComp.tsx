@@ -44,8 +44,13 @@ const HamComp = (prop: HamProps) => {
     prop.close(false);
   };
   const goSignup = () => {
-    router.push("/acct/signup"); //signup
+    router.push("/acct/signup");
     // setIsLogin(true);
+    prop.close(false);
+  };
+
+  const goMypage = () => {
+    router.push("/acct/mypage");
     prop.close(false);
   };
 
@@ -115,7 +120,10 @@ const HamComp = (prop: HamProps) => {
                 <div className="w-full h-[500px]">
                   <div className="space20" />
                   <p className="text-[15px] text-left text-black">{email}</p>
-                  <p className="text-[15px] text-left text-[#9a9a9a] cursor-pointer">
+                  <p
+                    className="text-[15px] text-left text-[#9a9a9a] cursor-pointer"
+                    onClick={goMypage}
+                  >
                     내 정보 수정 &gt;
                   </p>
                   <div className="w-[326px] h-24">
