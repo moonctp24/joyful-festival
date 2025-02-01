@@ -40,7 +40,10 @@ const ResultComp = () => {
 
   return (
     <>
-      <ResultTabComp selectedTabNum={selectedTabNum} />
+      <ResultTabComp
+        selectedTabNum={selectedTabNum}
+        selectList={["지도로보기", "리스트로보기"]}
+      />
       <div className="flex">
         <div
           className={`${

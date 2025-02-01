@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 type ResultTabCompProps = {
+  selectList: Array<string>;
   selectedTabNum: (tabNum: number) => void;
 };
 const ResultTabComp = (props: ResultTabCompProps) => {
@@ -24,7 +25,7 @@ const ResultTabComp = (props: ResultTabCompProps) => {
           }`}
           onClick={() => setResultTab(0)}
         >
-          지도로보기
+          {props.selectList ? props.selectList[0] : "첫 번째 탭"}
         </div>
         <div
           className={`text-base font-semibold menu ${
@@ -32,7 +33,7 @@ const ResultTabComp = (props: ResultTabCompProps) => {
           }`}
           onClick={() => setResultTab(1)}
         >
-          리스트로보기
+          {props.selectList ? props.selectList[1] : "두 번째 탭"}
         </div>
       </div>
     </>
