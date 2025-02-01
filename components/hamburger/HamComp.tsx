@@ -115,7 +115,7 @@ const HamComp = (prop: HamProps) => {
                 <div className="w-full h-[500px]">
                   <div className="space20" />
                   <p className="text-[15px] text-left text-black">{email}</p>
-                  <p className="text-[15px] text-left text-[#9a9a9a]">
+                  <p className="text-[15px] text-left text-[#9a9a9a] cursor-pointer">
                     내 정보 수정 &gt;
                   </p>
                   <div className="w-[326px] h-24">
