@@ -12,6 +12,11 @@ export const ING_YN_LIST = [
   { value: "02", text: "개최예정" },
   { value: "03", text: "개최종료" },
 ];
+export const ING_YN_TEXT_LIST = ING_YN_LIST.map(
+  (i: { value: string; text: string }) => {
+    return i.text;
+  },
+);
 
 /**
  * Month List
@@ -31,3 +36,8 @@ export const MONTH_LIST = [
   { value: 11, text: "11월" },
   { value: 12, text: "12월" },
 ];
+export const MONTH_TEXT_LIST = MONTH_LIST.map(
+  (i: { value: number; text: string }) => {
+    return i.text;
+  },
+);

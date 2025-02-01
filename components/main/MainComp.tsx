@@ -7,7 +7,12 @@ import MainTabComp from "./MainTabComp";
 import ResultComp from "./resultArea/ResultComp";
 import InputComp from "../comm/inputComp/InputComp";
 import axios from "axios";
-import { ING_YN_LIST, MONTH_LIST } from "@/constants/CONST";
+import {
+  ING_YN_LIST,
+  ING_YN_TEXT_LIST,
+  MONTH_LIST,
+  MONTH_TEXT_LIST,
+} from "@/constants/CONST";
 import { RootState } from "@/store";
 import { mapAction } from "@/store/map/map-slice";
 import { alertAction } from "@/store/modal/alert-slice";
@@ -38,20 +43,6 @@ const MainComp: NextPage = () => {
   const code1 = "ing";
   const code2 = "month";
   const code3 = "region";
-
-  // 진행여부 Drop Box Setting
-  const ingYNListText = ING_YN_LIST.map(
-    (i: { value: string; text: string }) => {
-      return i.text;
-    },
-  );
-
-  // 개최시기 Drop Box Setting
-  const monthListText = MONTH_LIST.map(
-    (ml: { value: number; text: string }) => {
-      return ml.text;
-    },
-  );
 
   // 지역 Drop Box Setting
   const [regionList, setRegionList] = useState(["지역 선택"]);
@@ -142,7 +133,7 @@ const MainComp: NextPage = () => {
 
   const selectOption = (option: { code: string; value: string }) => {
     const selectedCode = option.code;
-    console.log("reslect check:: ", option);
+    // console.log("reslect check:: ", option);
     if (selectedCode === code1) {
       const selectedIngValue = ING_YN_LIST.filter(
         (i) => i.text === option.value,
@@ -158,23 +149,19 @@ const MainComp: NextPage = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("ingYNListText changed", ingYNListText);
-  }, [ingYNListText]);
-
   return (
     <>
       <MainTabComp />
       <div className="webFlex">
         <div className="webFlex webMarginR">
           <DropBoxComp
-            stateList={ingYNListText}
+            stateList={ING_YN_TEXT_LIST}
             code={code1}
             selectOption={selectOption}
           />
           <div className="space20 webHidden" />
           <DropBoxComp
-            stateList={monthListText}
+            stateList={MONTH_TEXT_LIST}
             code={code2}
             selectOption={selectOption}
           />
