@@ -59,6 +59,12 @@ const Header = () => {
   const goMypage = () => {
     router.push("/acct/mypage");
   };
+  const goMain = () => {
+    router.push("/");
+  };
+  const goMylike = () => {
+    router.push("/acct/mylike");
+  };
   const goLogout = () => {
     const data = {
       token: token,
@@ -141,13 +147,19 @@ const Header = () => {
       <nav className="navbar_full">
         <ul className="navbar__menu">
           <li>
-            <button className="text-xl menuBtn">국내축제</button>
+            <button className="text-xl menuBtn" onClick={goMain}>
+              국내축제
+            </button>
           </li>
           <li>
-            <button className="text-xl menuBtn">세계축제</button>
+            <button className="text-xl menuBtn" onClick={goMain}>
+              세계축제
+            </button>
           </li>
           <li>
-            <button className="text-xl menuBtn">관심행사</button>
+            <button className="text-xl menuBtn" onClick={goMylike}>
+              관심행사
+            </button>
           </li>
         </ul>
       </nav>
