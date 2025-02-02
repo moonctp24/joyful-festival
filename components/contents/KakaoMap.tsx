@@ -45,6 +45,7 @@ type KakaoMapProps = {
   scaleLevel: number;
 };
 type DtlInfo = {
+  id: string;
   title: string;
   save: boolean;
   detailAt: string; // 상세 위치
@@ -340,6 +341,7 @@ const KakaoMap = (props: KakaoMapProps) => {
   const { center_position, scaleLevel } = props;
   const [positions, setPositions] = useState<Position[]>([]);
   const [posDtlInfo, setPosDtlInfo] = useState<DtlInfo>({
+    id: "",
     title: "",
     save: false,
     detailAt: "",
