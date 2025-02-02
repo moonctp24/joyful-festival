@@ -4,6 +4,7 @@ import Heart from "../comm/like/Heart";
 import { useState } from "react";
 
 type DtlInfo = {
+  id: string;
   title: string;
   save?: boolean;
   detailAt?: string; // 상세 위치
@@ -23,6 +24,13 @@ const FestivalDetail = (props: FstvDtlProps) => {
 
   const [likeYN, setLikeYN] = useState(false);
   const likeClick = (clickYN: boolean) => {
+    if (clickYN) {
+      // like
+      console.log(dtlInfo.id);
+    } else {
+      //unlike
+      console.log(clickYN);
+    }
     setLikeYN(clickYN);
   };
 

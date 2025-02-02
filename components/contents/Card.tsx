@@ -5,6 +5,7 @@ import { useState } from "react";
 
 type CardPropsType = {
   festivalInfo: {
+    id: string;
     festivalImg: string;
     festivalTitle: string;
     festivalPeriod: string;
