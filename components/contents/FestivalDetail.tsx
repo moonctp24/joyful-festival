@@ -1,7 +1,11 @@
 import { FESTIVAL_DEFAULT_IMAGE } from "@/constants/CONST";
 import Image from "next/image";
 import Heart from "../comm/like/Heart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store";
+import axios from "axios";
+import { alertAction } from "@/store/modal/alert-slice";
 
 type DtlInfo = {
   id: string;
@@ -22,15 +26,42 @@ type FstvDtlProps = {
 const FestivalDetail = (props: FstvDtlProps) => {
   const { dtlInfo } = props;
 
+  const dispatch = useDispatch();
+
+  const token2 = useSelector((state: RootState) => state.login.accessToken);
+  const [token, setToken] = useState(token2);
+  useEffect(() => {
+    const token3 = localStorage.getItem("accessToken") || "null";
+    setToken(token3);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token2]);
+
   const [likeYN, setLikeYN] = useState(false);
   const likeClick = (clickYN: boolean) => {
-    if (clickYN) {
-      // like
-      console.log(dtlInfo.id);
-    } else {
-      //unlike
-      console.log(clickYN);
-    }
+    // const data = {
+    //   id: dtlInfo.id,
+    //   token: token,
+    // };
+    // axios
+    //   .post("/api/festival/doLike", data)
+    //   .then((response: any) => {
+    //     console.log("like 결과");
+    //     console.log(response.data);
+    //     if (response.data.code === 200) {
+    //       dispatch(alertAction.openModal({ cont: response.data.message }));
+    //       if (clickYN) {
+    //         console.log("like success");
+    //       } else {
+    //         console.log("unlike success");
+    //       }
+    //       setLikeYN(clickYN);
+    //     } else {
+    //       dispatch(alertAction.openModal({ cont: response.data.message }));
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
     setLikeYN(clickYN);
   };
 
