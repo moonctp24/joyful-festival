@@ -38,23 +38,23 @@ const Card = (props: CardPropsType) => {
 
   return (
     <div>
-      {/* <div className="w-full aspect-w-1 aspect-h-1 max-w-[150px] sm:max-w-[200px] md:max-w-[300px]"> */}
-      <Image
-        width={170}
-        height={170}
-        src={festivalImg?.length > 0 ? festivalImg : FESTIVAL_DEFAULT_IMAGE}
-        alt={"festivalImg"}
-        // style={{ width: "150px", height: "150px" }}
-        className="rounded-lg max-w-[150px] md:max-w-[170px] max-h-[150px] md:max-h-[170px]" // 필요에 따라 이미지 모서리 둥글게 만들기
-        onClick={() => pingClicked()}
-      ></Image>
-      {/* </div> */}
-      <p className="w-full h-[27px] text-[15px] text-left text-black">
-        {festivalTitle}
-      </p>
-      <p className="w-full h-7 text-xs text-left text-black">
-        {festivalPeriod}
-      </p>
+      <div className="w-40 cursor-pointer">
+        <Image
+          width={170}
+          height={170}
+          src={festivalImg?.length > 0 ? festivalImg : FESTIVAL_DEFAULT_IMAGE}
+          alt={"festivalImg"}
+          // style={{ width: "150px", height: "150px" }}
+          className="rounded-lg max-w-[150px] md:max-w-[170px] max-h-[150px] md:max-h-[170px]" // 필요에 따라 이미지 모서리 둥글게 만들기
+          onClick={() => pingClicked()}
+        ></Image>
+        <p className="w-full h-[27px] text-[15px] text-left text-black">
+          {festivalTitle}
+        </p>
+        <p className="w-full h-7 text-xs text-left text-black">
+          {festivalPeriod}
+        </p>
+      </div>
 
       <FestivalDetail
         isOpen={pingOpen}
