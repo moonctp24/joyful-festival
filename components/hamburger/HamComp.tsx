@@ -88,30 +88,32 @@ const HamComp = (prop: HamProps) => {
       {prop.isOpen && (
         <div className="popup_common">
           <div
-            className="popup"
+            className="popup h-full"
             style={{ display: prop.isOpen ? "block" : "none", zIndex: 930 }}
           >
             <div className="w-full h-full overflow-hidden bg-white p-4">
-              <div className="flex h-full">
-                {isLogin ? (
-                  <div className="flex">
-                    <p className="text-xl text-left text-black pr-0 font-semibold">
-                      {name}
-                    </p>
-                    <p className="text-[17px] text-left text-black font-normal pl-0 mt-2.5">
-                      님
-                    </p>
-                  </div>
-                ) : (
-                  <div className="flex h-12">
-                    <p className="text-xl text-black pr-0 font-semibold">
-                      로그인
-                    </p>
-                    <p className="text-[17px] text-black pl-0 mt-2.5 font-normal ">
-                      해주세요
-                    </p>
-                  </div>
-                )}
+              <div className="flex">
+                <div className="h-12">
+                  {isLogin ? (
+                    <div className="flex">
+                      <p className="text-xl text-left text-black pr-0 font-semibold">
+                        {name}
+                      </p>
+                      <p className="text-[17px] text-left text-black font-normal pl-0 mt-2.5">
+                        님
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex">
+                      <p className="text-xl text-black pr-0 font-semibold">
+                        로그인
+                      </p>
+                      <p className="text-[17px] text-black pl-0 mt-2.5 font-normal ">
+                        해주세요
+                      </p>
+                    </div>
+                  )}
+                </div>
                 <p
                   className="text-xl text-center text-black absolute right-3 cursor-pointer"
                   onClick={() => {
@@ -121,22 +123,23 @@ const HamComp = (prop: HamProps) => {
                   X
                 </p>
               </div>
-              {isLogin ? (
-                <div className="w-full h-[500px]">
-                  <div className="space20" />
-                  <p className="text-[15px] text-left text-black">{email}</p>
-                  <p
-                    className="text-[15px] text-left text-[#9a9a9a] cursor-pointer"
-                    onClick={goMypage}
-                  >
-                    내 정보 수정 &gt;
-                  </p>
-                  <div className="space30"></div>
-                  <div
-                    className="w-[326px] h-24 m-auto cursor-pointer"
-                    onClick={goMylike}
-                  >
-                    <div className="flex justify-center items-center w-[326px] h-24 gap-2.5 px-[15px] py-2.5 rounded-[5px] bg-[#eeecec]">
+
+              <div className="w-full h-5/6">
+                {isLogin && (
+                  <div>
+                    <div className="space20" />
+                    <p className="text-[15px] text-left text-black">{email}</p>
+                    <p
+                      className="text-[15px] text-left text-[#9a9a9a] cursor-pointer"
+                      onClick={goMypage}
+                    >
+                      내 정보 수정 &gt;
+                    </p>
+                    <div className="space30"></div>
+                    <div
+                      className="flex justify-center items-center w-[326px] h-24 m-auto gap-2.5 px-[15px] py-2.5 rounded-[5px] bg-[#eeecec] cursor-pointer"
+                      onClick={goMylike}
+                    >
                       <p className="w-3/4 text-base text-left text-[#020202]">
                         관심행사
                       </p>
@@ -158,10 +161,8 @@ const HamComp = (prop: HamProps) => {
                       </div>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <div className="w-full h-[500px]" />
-              )}
+                )}
+              </div>
               {isLogin ? (
                 <div>
                   <svg
