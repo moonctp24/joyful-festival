@@ -4,6 +4,11 @@
 export const FESTIVAL_DEFAULT_IMAGE = "/images/joyful-festival-icon.png";
 
 /**
+ * back server
+ */
+export const BACK_URL = "https://65fb-14-5-179-154.ngrok-free.app";
+
+/**
  * festival ing Code List
  */
 export const ING_YN_LIST = [

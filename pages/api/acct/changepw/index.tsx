@@ -1,3 +1,4 @@
+import { BACK_URL } from "@/constants/CONST";
 import axios, { AxiosError } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -9,17 +10,13 @@ export default async function handler(
 
   console.log(req.body);
   try {
-    const response = await axios.post(
-      `http://ec2-3-34-40-99.ap-northeast-2.compute.amazonaws.com/auth/signout`,
-      req.body,
-      {
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          // AccessToken: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZCIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNzM2OTM0Mjg4LCJleHAiOjE3MzY5Mzc4ODh9.kbCAQCR5aKacZJFQKxj39cAOW8HO3fFqYjecR9FLfeA`,
-          AccessToken: adminJwt ? `Bearer ${adminJwt}` : "",
-        },
+    const response = await axios.post(`${BACK_URL}/auth/signout`, req.body, {
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        // AccessToken: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZCIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNzM2OTM0Mjg4LCJleHAiOjE3MzY5Mzc4ODh9.kbCAQCR5aKacZJFQKxj39cAOW8HO3fFqYjecR9FLfeA`,
+        AccessToken: adminJwt ? `Bearer ${adminJwt}` : "",
       },
-    );
+    });
     res.status(200).json(response.data);
   } catch (error: unknown) {
     if (error instanceof AxiosError) {

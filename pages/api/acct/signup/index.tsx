@@ -1,3 +1,4 @@
+import { BACK_URL } from "@/constants/CONST";
 import axios, { AxiosError } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -16,7 +17,7 @@ export default async function handler(
     //`${BASE_URL}${url}${getParamSetting}`
     try {
       const response = await axios.get(
-        `http://ec2-3-34-40-99.ap-northeast-2.compute.amazonaws.com/festivals${getParamSetting}`,
+        `${BACK_URL}/festivals${getParamSetting}`,
         { headers: req.headers },
       );
       res.status(200).json(response.data);
@@ -32,11 +33,9 @@ export default async function handler(
   } else if (req.method === "POST") {
     console.log(req.body);
     try {
-      const response = await axios.post(
-        `http://ec2-3-34-40-99.ap-northeast-2.compute.amazonaws.com/auth/signup`,
-        req.body,
-        { headers: req.headers },
-      );
+      const response = await axios.post(`${BACK_URL}/auth/signup`, req.body, {
+        headers: req.headers,
+      });
       res.status(200).json(response.data);
     } catch (error: unknown) {
       if (error instanceof AxiosError) {

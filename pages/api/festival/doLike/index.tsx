@@ -1,4 +1,5 @@
 // pages/api/festivals.js
+import { BACK_URL } from "@/constants/CONST";
 import axios, { AxiosError } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -11,7 +12,7 @@ export default async function handler(
   if (req.method === "POST") {
     try {
       const response = await axios.post(
-        `http://ec2-3-34-40-99.ap-northeast-2.compute.amazonaws.com/festivals/${req.body.id}`,
+        `${BACK_URL}/festivals/${req.body.id}`,
         {
           headers: {
             "Content-Type": "application/json; charset=utf-8",
