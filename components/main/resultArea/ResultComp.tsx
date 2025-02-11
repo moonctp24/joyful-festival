@@ -24,10 +24,7 @@ const ResultComp = () => {
     setNowResultTabNum(tabNum);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const festivalList = (festList: any) => {
-    // console.log("parent");
-    // console.log(festList);
+  const festivalList = (festList: Position[]) => {
     setFesList(festList);
   };
 
