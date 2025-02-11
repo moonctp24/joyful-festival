@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 import axios from "axios";
 import { alertAction } from "@/store/modal/alert-slice";
+import { useRouter } from "next/router";
+import { NULL_CHECK } from "@/constants/commUtils";
 
 type DtlInfo = {
   id: string;
@@ -17,6 +19,7 @@ type DtlInfo = {
   festivalImg?: string;
   festivalTitle?: string;
   festivalPeriod?: string;
+  isLike: boolean;
 };
 type FstvDtlProps = {
   isOpen: boolean;
@@ -28,6 +31,8 @@ const FestivalDetail = (props: FstvDtlProps) => {
 
   const dispatch = useDispatch();
 
+  const router = useRouter();
+
   const token2 = useSelector((state: RootState) => state.login.accessToken);
   const [token, setToken] = useState(token2);
   useEffect(() => {
@@ -36,33 +41,35 @@ const FestivalDetail = (props: FstvDtlProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token2]);
 
-  const [likeYN, setLikeYN] = useState(false);
+  const [likeYN, setLikeYN] = useState(dtlInfo.isLike);
   const likeClick = (clickYN: boolean) => {
-    const data = {
-      id: dtlInfo.id,
-      token: token,
-    };
-    axios
-      .post("/api/festival/doLike", data)
-      .then((response: any) => {
-        console.log("like 결과");
-        console.log(response.data);
-        if (response.data.code === 200) {
-          dispatch(alertAction.openModal({ cont: response.data.message }));
-          if (clickYN) {
-            console.log("like success");
+    if (NULL_CHECK(token)) {
+      const data = {
+        id: dtlInfo.id,
+        token: token,
+      };
+      axios
+        .post("/api/festival/doLike", data)
+        .then((response: any) => {
+          if (response.data.code === 200) {
+            dispatch(alertAction.openModal({ cont: response.data.message }));
+            if (clickYN) {
+              console.log("like success");
+            } else {
+              console.log("unlike success");
+            }
+            setLikeYN(clickYN);
           } else {
-            console.log("unlike success");
+            dispatch(alertAction.openModal({ cont: response.data.message }));
           }
-          setLikeYN(clickYN);
-        } else {
-          dispatch(alertAction.openModal({ cont: response.data.message }));
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-    setLikeYN(clickYN);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      setLikeYN(clickYN);
+    } else {
+      router.push("/acct/login");
+    }
   };
 
   return (
