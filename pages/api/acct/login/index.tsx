@@ -34,7 +34,10 @@ export default async function handler(
     console.log(req.body);
     try {
       const response = await axios.post(`${BACK_URL}/auth/signin`, req.body, {
-        headers: req.headers,
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "ngrok-skip-browser-warning": "ok",
+        },
       });
       res.status(200).json(response.data);
     } catch (error: unknown) {

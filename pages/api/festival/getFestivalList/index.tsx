@@ -1,4 +1,5 @@
 // pages/api/festivals.js
+import { BACK_URL } from "@/constants/CONST";
 import axios, { AxiosError } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -17,8 +18,14 @@ export default async function handler(
     //`${BASE_URL}${url}${getParamSetting}`
     try {
       const response = await axios.get(
-        `http://ec2-3-34-40-99.ap-northeast-2.compute.amazonaws.com/festivals${getParamSetting}`,
-        { headers: req.headers },
+        `${BACK_URL}/festivals${getParamSetting}`,
+        // { headers: req.headers },
+        {
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            "ngrok-skip-browser-warning": "ok",
+          },
+        },
       );
       res.status(200).json(response.data);
     } catch (error: unknown) {

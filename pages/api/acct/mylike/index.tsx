@@ -9,11 +9,11 @@ export default async function handler(
   const adminJwt = req.body.token;
 
   try {
-    const response = await axios.get(`${BACK_URL}/auth/signout`, {
+    const response = await axios.get(`${BACK_URL}/mypage/like/festivals`, {
       headers: {
         "Content-Type": "application/json; charset=utf-8",
-        // AccessToken: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZCIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNzM2OTM0Mjg4LCJleHAiOjE3MzY5Mzc4ODh9.kbCAQCR5aKacZJFQKxj39cAOW8HO3fFqYjecR9FLfeA`,
-        AccessToken: adminJwt ? `Bearer ${adminJwt}` : "",
+        Authorization: adminJwt ? `Bearer ${adminJwt}` : "",
+        "ngrok-skip-browser-warning": "ok",
       },
     });
     res.status(200).json(response.data);
