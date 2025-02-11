@@ -70,10 +70,8 @@ const MyLikeComp = () => {
     axios
       .post("/api/acct/mylike", data)
       .then((response: any) => {
-        console.log("mylike 조회 결과");
-        console.log(response.data);
         if (response.data.code === 200) {
-          setFesList(response);
+          setFesList(response.data.data);
           dispatch(alertAction.openModal({ cont: response.data.message }));
         } else {
           dispatch(alertAction.openModal({ cont: response.data.message }));
