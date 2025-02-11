@@ -72,13 +72,9 @@ const Header = () => {
     axios
       .post("/api/acct/logout", data)
       .then((response) => {
-        console.log("logout 결과");
-        console.log(response.data);
         if (response.data.code === 200) {
-          // getNewPingList(response);
-          // const loginData = response.data.data;
           dispatch(loginAction.logout());
-          // dispatch(alertAction.openModal({ cont: response.data.message }));
+          dispatch(alertAction.openModal({ cont: response.data.message }));
           router.push("/");
         } else {
           dispatch(alertAction.openModal({ cont: response.data.message }));

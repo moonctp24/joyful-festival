@@ -32,7 +32,6 @@ const mapSlice = createSlice({
       state.month = action.payload.month;
       state.region = action.payload.region;
       state.word = action.payload.word;
-      console.log("0000000");
     },
   },
 });

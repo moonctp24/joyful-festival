@@ -56,8 +56,6 @@ const LoginComp = () => {
       axios
         .post("/api/acct/login", data)
         .then((response) => {
-          console.log("login 결과");
-          console.log(response.data);
           if (response.data.code === 200) {
             // getNewPingList(response);
             const loginData = response.data.data;

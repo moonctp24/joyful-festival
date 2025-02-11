@@ -23,7 +23,6 @@ const loginSlice = createSlice({
       localStorage.setItem("userName", action.payload.userName);
       localStorage.setItem("accessToken", action.payload.accessToken);
       localStorage.setItem("refreshToken", action.payload.refreshToken);
-      // console.log("login action setToken()");
     },
     logout: (state) => {
       state.isLogin = false;
@@ -37,7 +36,6 @@ const loginSlice = createSlice({
       localStorage.removeItem("userName");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      // console.log("logout action removeToken()");
     },
   },
 });

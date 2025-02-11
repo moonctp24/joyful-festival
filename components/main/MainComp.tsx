@@ -133,7 +133,6 @@ const MainComp: NextPage = () => {
 
   const selectOption = (option: { code: string; value: string }) => {
     const selectedCode = option.code;
-    // console.log("reslect check:: ", option);
     if (selectedCode === code1) {
       const selectedIngValue = ING_YN_LIST.filter(
         (i) => i.text === option.value,

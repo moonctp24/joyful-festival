@@ -80,10 +80,7 @@ const SignupComp = () => {
       axios
         .post("/api/acct/signup", data)
         .then((response) => {
-          console.log("회원가입 결과");
-          console.log(response.data);
           if (response.data.code === 200) {
-            // getNewPingList(response);
             const loginData = response.data.data;
             dispatch(
               loginAction.login({

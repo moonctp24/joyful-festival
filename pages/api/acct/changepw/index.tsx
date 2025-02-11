@@ -8,7 +8,6 @@ export default async function handler(
 ) {
   const adminJwt = req.body.token;
 
-  console.log(req.body);
   try {
     const response = await axios.post(`${BACK_URL}/auth/signout`, req.body, {
       headers: {

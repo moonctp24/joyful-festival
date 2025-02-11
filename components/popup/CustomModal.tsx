@@ -15,7 +15,6 @@ const CustomModal = () => {
   const title = useSelector((state: RootState) => state.custom.title);
   const cont = useSelector((state: RootState) => state.custom.cont);
   const width = useSelector((state: RootState) => state.custom.width);
-  console.log("innnn", isOpen, title);
 
   return (
     <div className="popup_common">
