@@ -38,6 +38,13 @@ const HamComp = (prop: HamProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoginYN, token2]);
 
+  useEffect(() => {
+    if (token === null || token.length === 0) {
+      dispatch(loginAction.logout());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
+
   const goLogin = () => {
     router.push("/acct/login");
     // setIsLogin(true);

@@ -12,6 +12,7 @@ type CardPropsType = {
     title: string;
     startDate: string;
     endDate: string;
+    isLike: boolean;
   };
 };
 const Card = (props: CardPropsType) => {
