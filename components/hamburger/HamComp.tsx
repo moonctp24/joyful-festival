@@ -72,7 +72,8 @@ const HamComp = (prop: HamProps) => {
           // getNewPingList(response);
           // const loginData = response.data.data;
           dispatch(loginAction.logout());
-          // dispatch(alertAction.openModal({ cont: response.data.message }));
+          dispatch(alertAction.openModal({ cont: response.data.message }));
+          prop.close(false);
           router.push("/");
         } else {
           dispatch(alertAction.openModal({ cont: response.data.message }));
