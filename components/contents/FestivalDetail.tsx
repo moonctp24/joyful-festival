@@ -38,30 +38,30 @@ const FestivalDetail = (props: FstvDtlProps) => {
 
   const [likeYN, setLikeYN] = useState(false);
   const likeClick = (clickYN: boolean) => {
-    // const data = {
-    //   id: dtlInfo.id,
-    //   token: token,
-    // };
-    // axios
-    //   .post("/api/festival/doLike", data)
-    //   .then((response: any) => {
-    //     console.log("like 결과");
-    //     console.log(response.data);
-    //     if (response.data.code === 200) {
-    //       dispatch(alertAction.openModal({ cont: response.data.message }));
-    //       if (clickYN) {
-    //         console.log("like success");
-    //       } else {
-    //         console.log("unlike success");
-    //       }
-    //       setLikeYN(clickYN);
-    //     } else {
-    //       dispatch(alertAction.openModal({ cont: response.data.message }));
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
+    const data = {
+      id: dtlInfo.id,
+      token: token,
+    };
+    axios
+      .post("/api/festival/doLike", data)
+      .then((response: any) => {
+        console.log("like 결과");
+        console.log(response.data);
+        if (response.data.code === 200) {
+          dispatch(alertAction.openModal({ cont: response.data.message }));
+          if (clickYN) {
+            console.log("like success");
+          } else {
+            console.log("unlike success");
+          }
+          setLikeYN(clickYN);
+        } else {
+          dispatch(alertAction.openModal({ cont: response.data.message }));
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     setLikeYN(clickYN);
   };
 
