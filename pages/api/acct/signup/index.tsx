@@ -31,7 +31,6 @@ export default async function handler(
       }
     }
   } else if (req.method === "POST") {
-    console.log(req.body);
     try {
       const response = await axios.post(`${BACK_URL}/auth/signup`, req.body, {
         headers: {
