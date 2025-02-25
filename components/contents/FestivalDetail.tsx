@@ -19,7 +19,7 @@ type DtlInfo = {
   festivalImg?: string;
   festivalTitle?: string;
   festivalPeriod?: string;
-  isLike: boolean;
+  isLiked: boolean;
 };
 type FstvDtlProps = {
   isOpen: boolean;
@@ -41,7 +41,7 @@ const FestivalDetail = (props: FstvDtlProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token2]);
 
-  const [likeYN, setLikeYN] = useState(dtlInfo.isLike);
+  const [likeYN, setLikeYN] = useState(dtlInfo.isLiked);
   const likeClick = (clickYN: boolean) => {
     if (NULL_CHECK(token)) {
       const data = {
@@ -52,7 +52,7 @@ const FestivalDetail = (props: FstvDtlProps) => {
         .post("/api/festival/doLike", data)
         .then((response: any) => {
           if (response.data.code === 200) {
-            dispatch(alertAction.openModal({ cont: response.data.message }));
+            // dispatch(alertAction.openModal({ cont: response.data.message }));
             if (clickYN) {
               console.log("like success");
             } else {
@@ -60,13 +60,12 @@ const FestivalDetail = (props: FstvDtlProps) => {
             }
             setLikeYN(clickYN);
           } else {
-            dispatch(alertAction.openModal({ cont: response.data.message }));
+            // dispatch(alertAction.openModal({ cont: response.data.message }));
           }
         })
         .catch((error) => {
           console.error(error);
         });
-      setLikeYN(clickYN);
     } else {
       router.push("/acct/login");
     }

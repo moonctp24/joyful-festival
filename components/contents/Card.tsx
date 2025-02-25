@@ -12,7 +12,7 @@ type CardPropsType = {
     title: string;
     startDate: string;
     endDate: string;
-    isLike: boolean;
+    isLiked: boolean;
   };
 };
 const Card = (props: CardPropsType) => {

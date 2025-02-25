@@ -13,6 +13,7 @@ export default async function handler(
     try {
       const response = await axios.post(
         `${BACK_URL}/festivals/like/${req.body.id}`,
+        {},
         {
           headers: {
             "Content-Type": "application/json; charset=utf-8",
@@ -22,7 +23,9 @@ export default async function handler(
         },
       );
       res.status(200).json(response.data);
-    } catch (error: unknown) {
+    } catch (error: any) {
+      // console.log(error.response?.data); // 서버에서 반환된 오류 메시지 확인
+      // console.log(error.response?.headers); // 응답 헤더 확인
       if (error instanceof AxiosError) {
         res
           .status(error.response?.status || 500)

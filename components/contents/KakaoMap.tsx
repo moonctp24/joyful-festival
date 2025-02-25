@@ -51,7 +51,7 @@ type DtlInfo = {
   detailAt: string; // 상세 위치
   startDate: string; // 시작 날짜 (ISO 형식 문자열)
   endDate?: string; // 종료 날짜 (선택적 속성)
-  isLike: boolean; // 좋아요여부
+  isLiked: boolean; // 좋아요여부
 };
 const KakaoMap = (props: KakaoMapProps) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -347,7 +347,7 @@ const KakaoMap = (props: KakaoMapProps) => {
     detailAt: "",
     startDate: "",
     endDate: "",
-    isLike: false,
+    isLiked: false,
   });
   const [pingOpen, setPingOpen] = useState(false); // Open YN Festival Detail Popup
   const [mapData, setMapData] = useState<{
