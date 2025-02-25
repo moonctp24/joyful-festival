@@ -58,6 +58,14 @@ const MypageComp = () => {
       );
       return false;
     }
+    if (passwordInput !== passwordConfirmInput) {
+      dispatch(
+        alertAction.openModal({
+          cont: "비밀번호와 비밀번호 확인이 같지 않습니다.",
+        }),
+      );
+      return false;
+    }
     return true;
   };
 
@@ -74,7 +82,6 @@ const MypageComp = () => {
     if (validationCheck()) {
       const data = {
         token: token,
-        email: email,
         password: passwordInput,
         passwordConfirm: passwordConfirmInput,
       };
@@ -84,18 +91,8 @@ const MypageComp = () => {
           console.log("비밀번호 변경 결과");
           console.log(response.data);
           if (response.data.code === 200) {
-            // getNewPingList(response);
-            // const loginData = response.data.data;
-            // dispatch(
-            //   loginAction.login({
-            //     userEmail: emailInput,
-            //     userName: nameInput,
-            //     accessToken: loginData.accessToken,
-            //     refreshToken: loginData.refreshToken,
-            //   }),
-            // );
             dispatch(alertAction.openModal({ cont: response.data.message }));
-            // router.push("/");
+            router.push("/");
           } else {
             dispatch(alertAction.openModal({ cont: response.data.message }));
           }
