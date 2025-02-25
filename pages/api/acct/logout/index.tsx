@@ -12,7 +12,7 @@ export default async function handler(
     const response = await axios.delete(`${BACK_URL}/auth/signout`, {
       headers: {
         "Content-Type": "application/json; charset=utf-8",
-        Authorization: adminJwt ? `Bearer ${adminJwt}` : "",
+        AccessToken: adminJwt ? `Bearer ${adminJwt}` : "",
       },
     });
     res.status(200).json(response.data);
